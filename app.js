@@ -497,18 +497,28 @@ function initPipelineArchitecture() {
 
     if (stageNum) stageNum.textContent = `Stage 0${num} Deep Dive`;
     
-    // Anime.js v4 ScrambleText Effect
+    // Anime.js v4 ScrambleText Effect for Stage Title
     if (stageTitle) {
       if (window.anime && typeof window.anime.scrambleText === 'function' && window.anime.animate) {
-        window.anime.animate(stageTitle, {
-          ...window.anime.scrambleText({
-            text: data.title,
-            chars: '0123456789ABCDEF$#@!%',
-            cursor: '_'
-          }),
-          duration: 650,
-          ease: 'outQuad'
-        });
+        try {
+          if (typeof window.anime.remove === 'function') {
+            window.anime.remove(stageTitle);
+          }
+          window.anime.animate(stageTitle, {
+            textContent: window.anime.scrambleText({
+              text: data.title,
+              chars: '0123456789ABCDEF$#@!%',
+              cursor: '_'
+            }),
+            duration: 450,
+            ease: 'outQuad',
+            onComplete: () => {
+              stageTitle.textContent = data.title;
+            }
+          });
+        } catch (e) {
+          stageTitle.textContent = data.title;
+        }
       } else {
         stageTitle.textContent = data.title;
       }
