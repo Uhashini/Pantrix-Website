@@ -444,6 +444,12 @@ body {
   border: 1px solid rgba(230, 226, 121, 0.35);
 }
 
+.pill-green {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.35);
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: 3.4rem;
