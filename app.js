@@ -344,59 +344,74 @@ class LayoutLMService:
 }`
   },
   6: {
-    title: 'Food Database Semantic Matching',
-    tech: 'RapidFuzz + SentenceTransformers',
-    why: 'Receipt items use truncated abbreviations ("BRWN RICE 1KG"). Hybrid matching maps items to nutritional database IDs using syntactic string ratios and neural embeddings.',
-    algo: '1. RapidFuzz token_set_ratio checks syntactic database match (>85% cutoff).<br>2. If failed, SentenceTransformers (all-MiniLM-L6-v2) computes cosine similarity against food vector embeddings.',
-    input: 'Clean item name string: "Bannana Fresh"',
-    output: 'Database Food Entity: food_id=4012 (Banana Raw, 89 kcal/100g, 1.1g protein)',
-    file: 'hybrid_matcher.py',
-    code: `# Stage 6: Syntactic + Neural Matching
-def match_food_item(query):
-    # Tier 1: Syntactic Fuzzy Match
-    match, score, _ = process.extractOne(query, db_names)
-    if score >= 85:
-        return get_food_by_name(match)
+    title: '3-Tier Product Normalization & Matching',
+    tech: 'PostgreSQL pg_trgm + Semantic NLP',
+    why: 'Receipt items contain abbreviations, OCR typos, and brand packaging info (e.g., "GOWARDHAN COW MLK 1L"). Raw strings cannot directly match standardized nutritional databases without multi-tier normalization.',
+    algo: '1. Text Normalization: Case folding, special char removal, volume/weight stripping.<br>2. Tier 1: Fast database-level trigram similarity in PostgreSQL (pg_trgm, >0.65 threshold).<br>3. Tier 2: Token-level lexical intersection comparison.<br>4. Tier 3: SentenceTransformers cosine similarity fallback.',
+    input: 'Noisy OCR text: "GOWARDHAN COW MLK 1L"',
+    output: 'Canonical Product: food_id=1042 ("Cow Milk", 62 kcal, 3.2g protein)',
+    file: 'three_tier_matcher.py',
+    code: `# Stage 6: 3-Tier Product Matching (FYP Panel 1 Slide 22)
+def match_receipt_item(raw_text, db_conn):
+    # Step 1: Normalization
+    clean_query = normalize_product_text(raw_text)
+    
+    # Tier 1: Fast PostgreSQL pg_trgm trigram matching
+    query = """
+    SELECT food_id, name, similarity(name, %s) as sim
+    FROM food_items 
+    WHERE name %% %s 
+    ORDER BY sim DESC LIMIT 1;
+    """
+    match = db_conn.execute(query, (clean_query, clean_query)).fetchone()
+    if match and match.sim >= 0.65:
+        return match.food_id
         
-    # Tier 2: Neural Cosine Similarity
-    query_emb = embed_model.encode(query)
-    sims = util.cos_sim(query_emb, precomputed_db_embs)
-    best_idx = sims.argmax()
-    return db_items[best_idx]`
+    # Tier 2 & 3: Lexical Token & Semantic Vector Fallback
+    return semantic_embedding_match(clean_query)`
   },
   7: {
-    title: 'Behavioral Baseline Tracking (EWMA)',
-    tech: 'Pandas & Rolling Stats',
-    why: 'Static budget limits fail because consumer spending changes dynamically. Pantrix maintains an Exponentially Weighted Moving Average (alpha=0.3) representing normal spending behavior.',
-    algo: 'EWMA formula: S_t = alpha * Y_t + (1 - alpha) * S_{t-1}, smoothly adapting to lifestyle changes while remaining resilient to one-off spikes.',
-    input: 'Historical receipt totals + Current receipt total',
-    output: 'Dynamic rolling baseline: ₹1,420 (tolerance upper: ₹1,850)',
-    file: 'ewma_tracker.py',
-    code: `# Stage 7: EWMA Spending Baseline
-def update_user_baseline(user_history, current_total):
+    title: 'Behavioral Baseline Tracking (EWMA & STL)',
+    tech: 'Pandas EWMA + STL Decomposition',
+    why: 'Consumer expenditure and food choices naturally fluctuate with weekly seasonality. Pantrix uses STL decomposition to isolate long-term trends from weekly cycles and maintains an EWMA rolling average (alpha=0.3).',
+    algo: '1. STL Decomposition: Separates expenditure time series Y_t into Trend T_t, Seasonal S_t, and Residual R_t.<br>2. Exponentially Weighted Moving Average (EWMA): S_t = 0.3 * Y_t + 0.7 * S_{t-1} tracking rolling baseline without lagging.',
+    input: 'Historical receipt totals & item frequencies',
+    output: 'Rolling dynamic baseline: ₹1,420 (Dynamic tolerance: ₹1,850)',
+    file: 'ewma_stl_tracker.py',
+    code: `# Stage 7: EWMA Spending Baseline (FYP Panel 1 Slide 37)
+def compute_baseline_drift(user_history, current_total):
     df = pd.DataFrame(user_history)
-    ewma_series = df['total'].ewm(alpha=0.3, adjust=False).mean()
-    new_baseline = ewma_series.iloc[-1]
+    # EWMA alpha = 0.3
+    df['ewma'] = df['total'].ewm(alpha=0.3, adjust=False).mean()
+    rolling_baseline = df['ewma'].iloc[-1]
+    
+    # Tolerance band (1.5 sigma)
     std_dev = df['total'].std()
-    return new_baseline, new_baseline + (1.5 * std_dev)`
+    tolerance_upper = rolling_baseline + (1.5 * std_dev)
+    is_anomaly = current_total > tolerance_upper
+    return rolling_baseline, is_anomaly`
   },
   8: {
     title: 'Anomaly Detection & Explainable AI (SHAP)',
     tech: 'Isolation Forest + TreeExplainer',
-    why: 'Flagging an anomaly without explanation is unhelpful. Isolation Forest flags budget deviations, and SHAP computes game-theoretic Shapley values attributing exact rupees of variance to each purchase.',
-    algo: '1. sklearn.ensemble.IsolationForest(contamination=0.1) flags out-of-distribution cart.<br>2. shap.TreeExplainer calculates marginal feature contributions for each line item.',
-    input: 'Cart feature vector (spend, item counts, unit rates)',
-    output: 'SHAP Attribution: Deluxe Ice Cream (+0.48), Frozen Pizza (+0.31)',
-    file: 'shap_explainer.py',
-    code: `# Stage 8: Isolation Forest + SHAP
-def explain_anomaly(features, model):
-    is_outlier = model.predict([features])[0] == -1
-    if is_outlier:
+    why: 'Users ignore opaque black-box budget warnings. Isolation Forest flags anomalous expenditure carts, and SHAP computes Shapley values attributing exact rupees of deviation to individual receipt items.',
+    algo: '1. sklearn.ensemble.IsolationForest(contamination=0.1) flags out-of-distribution cart vectors.<br>2. shap.TreeExplainer evaluates marginal feature contribution phi_i for each item purchase.',
+    input: 'Receipt item feature vector [spend, brand_ratio, impulse_weight]',
+    output: 'SHAP Feature Attribution: Deluxe Ice Cream (+0.48), Frozen Pizzas (+0.31)',
+    file: 'shap_isolation_forest.py',
+    code: `# Stage 8: Isolation Forest + SHAP (FYP Panel 1 Slide 35-36)
+def explain_cart_anomaly(features, model, feature_names):
+    prediction = model.predict([features])[0]
+    if prediction == -1: # Anomaly detected
         explainer = shap.TreeExplainer(model)
         shap_values = explainer.shap_values(features)
-        # Sort features by highest positive impact on anomaly
-        contributions = rank_contributions(shap_values, feature_names)
-        return is_outlier, contributions
+        
+        # Attribute exact rupees of variance to each line item
+        attributions = sorted(
+            zip(feature_names, shap_values),
+            key=lambda x: x[1], reverse=True
+        )
+        return True, attributions
     return False, []`
   },
   9: {
@@ -424,6 +439,9 @@ def generate_insights(shap_summary, baseline_stats):
 
 function initPipelineArchitecture() {
   const stageCards = document.querySelectorAll('.stage-card');
+  const stepPills = document.querySelectorAll('.step-pill');
+  const prevBtn = document.getElementById('prevStageBtn');
+  const nextBtn = document.getElementById('nextStageBtn');
   const simBtn = document.getElementById('runPipelineSimBtn');
   const resetBtn = document.getElementById('resetPipelineBtn');
   const statusText = document.getElementById('simStatusText');
@@ -439,14 +457,41 @@ function initPipelineArchitecture() {
   const outputText = document.getElementById('inspOutput');
   const codeTitle = document.getElementById('inspCodeTitle');
   const codeSnippet = document.getElementById('inspCodeSnippet');
+  const inspectorCard = document.getElementById('stageInspector');
 
-  function updateInspector(num) {
+  let activeStageIndex = 1;
+
+  function updateInspector(num, shouldScroll = false) {
+    if (num < 1) num = 1;
+    if (num > 9) num = 9;
+    activeStageIndex = num;
+
     const data = PIPELINE_DATA[num];
     if (!data) return;
 
-    stageCards.forEach((c) => c.classList.remove('active-stage'));
-    const activeCard = document.querySelector(`.stage-card[data-stage="${num}"]`);
-    if (activeCard) activeCard.classList.add('active-stage');
+    // Update Stage Cards active state
+    stageCards.forEach((c) => {
+      const cNum = parseInt(c.getAttribute('data-stage'), 10);
+      const hint = c.querySelector('.inspect-hint');
+      if (cNum === num) {
+        c.classList.add('active-stage');
+        if (hint) hint.innerHTML = '<i class="fa-solid fa-circle-info"></i> Active Stage';
+      } else {
+        c.classList.remove('active-stage');
+        if (hint) hint.textContent = 'Click to inspect';
+      }
+    });
+
+    // Update Top Quick Stepper Pills
+    stepPills.forEach((p) => {
+      const pNum = parseInt(p.getAttribute('data-step'), 10);
+      if (pNum === num) {
+        p.classList.add('active');
+        p.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        p.classList.remove('active');
+      }
+    });
 
     if (stageNum) stageNum.textContent = `Stage 0${num} Deep Dive`;
     if (stageTitle) stageTitle.textContent = data.title;
@@ -462,15 +507,49 @@ function initPipelineArchitecture() {
       const pct = (num / 9) * 100;
       progressFill.style.width = `${pct}%`;
     }
+
+    // Auto-scroll on mobile/tablets so user immediately sees the details!
+    if (shouldScroll && window.innerWidth < 992 && inspectorCard) {
+      inspectorCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      inspectorCard.classList.remove('inspector-highlight-pulse');
+      void inspectorCard.offsetWidth; // Trigger reflow for animation
+      inspectorCard.classList.add('inspector-highlight-pulse');
+      setTimeout(() => inspectorCard.classList.remove('inspector-highlight-pulse'), 1500);
+    }
   }
 
+  // Card Clicks (triggers auto-scroll on mobile)
   stageCards.forEach((card) => {
     card.addEventListener('click', () => {
       const num = parseInt(card.getAttribute('data-stage'), 10);
-      updateInspector(num);
+      updateInspector(num, true);
       if (statusText) statusText.textContent = `Inspecting Stage 0${num}: ${PIPELINE_DATA[num].title}`;
     });
   });
+
+  // Top Stepper Pills (switches stage directly without scrolling)
+  stepPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const num = parseInt(pill.getAttribute('data-step'), 10);
+      updateInspector(num, false);
+      if (statusText) statusText.textContent = `Inspecting Stage 0${num}: ${PIPELINE_DATA[num].title}`;
+    });
+  });
+
+  // Prev / Next Stepper buttons
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const target = activeStageIndex > 1 ? activeStageIndex - 1 : 9;
+      updateInspector(target, false);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const target = activeStageIndex < 9 ? activeStageIndex + 1 : 1;
+      updateInspector(target, false);
+    });
+  }
 
   // Automated Simulation Runner
   let simTimer = null;
@@ -490,7 +569,7 @@ function initPipelineArchitecture() {
       let currentStage = 1;
 
       simTimer = setInterval(() => {
-        updateInspector(currentStage);
+        updateInspector(currentStage, false);
         if (statusText) {
           statusText.innerHTML = `<span style="color:#2ecc71"><i class="fa-solid fa-spinner fa-spin"></i> Executing Stage 0${currentStage}:</span> ${PIPELINE_DATA[currentStage].title}`;
         }
@@ -512,7 +591,7 @@ function initPipelineArchitecture() {
       if (simTimer) clearInterval(simTimer);
       isSimulating = false;
       if (simBtn) simBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run Live Pipeline Simulation';
-      updateInspector(1);
+      updateInspector(1, false);
       if (statusText) statusText.textContent = 'Ready: Click any stage to inspect';
     });
   }
