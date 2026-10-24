@@ -64,7 +64,7 @@
         <a href="#objectives" class="nav-link">Objectives</a>
         <a href="#pipeline" class="nav-link">9-Stage Pipeline</a>
         <a href="#demo" class="nav-link">App Showcase</a>
-        <a href="#api-docs" class="nav-link">Architecture</a>
+        <a href="#roadmap" class="nav-link">Roadmap</a>
         <a href="#team" class="nav-link">Team 74</a>
       </nav>
 
@@ -91,7 +91,6 @@
         <a href="#objectives" class="mobile-link">Engineering Goals</a>
         <a href="#pipeline" class="mobile-link">9-Stage Architecture</a>
         <a href="#demo" class="mobile-link">Interactive Demo</a>
-        <a href="#api-docs" class="mobile-link">API Explorer</a>
         <a href="#roadmap" class="mobile-link">Milestone Roadmap</a>
         <a href="#team" class="mobile-link">Team 74</a>
       </nav>
@@ -1462,93 +1461,7 @@ def preprocess_receipt(image_bytes):
     </div>
   </section>
 
-  <!-- Section 7: Interactive Documentation & API Explorer -->
-  <section class="api-section" id="api-docs">
-    <div class="container">
-      <div class="section-heading-center">
-        <span class="section-subtitle">System Interface Specification</span>
-        <h2 class="section-title">Interactive API &amp; Architecture Explorer</h2>
-        <p class="section-desc">
-          Test live request schemas, response payloads, and endpoint documentation matching the FastAPI backend:
-        </p>
-      </div>
 
-      <div class="api-explorer-box">
-        <!-- API Endpoint Selector Sidebar -->
-        <div class="api-endpoints-list">
-          <div class="api-list-title">RESTful API Endpoints</div>
-          
-          <button class="api-endpoint-btn active" data-endpoint="upload">
-            <span class="http-badge post">POST</span>
-            <div class="endpoint-name">
-              <strong>/api/v1/receipt/upload</strong>
-              <span>Ingest image &amp; extract LayoutLMv3</span>
-            </div>
-          </button>
-
-          <button class="api-endpoint-btn" data-endpoint="save-money">
-            <span class="http-badge post">POST</span>
-            <div class="endpoint-name">
-              <strong>/api/v1/analytics/save-money</strong>
-              <span>EWMA baseline &amp; brand swaps</span>
-            </div>
-          </button>
-
-          <button class="api-endpoint-btn" data-endpoint="shap">
-            <span class="http-badge post">POST</span>
-            <div class="endpoint-name">
-              <strong>/api/v1/explain/shap</strong>
-              <span>TreeExplainer anomaly attribution</span>
-            </div>
-          </button>
-
-          <button class="api-endpoint-btn" data-endpoint="nutrition">
-            <span class="http-badge post">POST</span>
-            <div class="endpoint-name">
-              <strong>/api/v1/analytics/nutrition</strong>
-              <span>NOVA classification &amp; protein density</span>
-            </div>
-          </button>
-        </div>
-
-        <!-- API Request / Response Viewer -->
-        <div class="api-details-pane">
-          <div class="api-pane-header">
-            <div class="api-title-row">
-              <span class="http-badge post" id="apiActiveMethod">POST</span>
-              <code class="endpoint-url" id="apiActiveUrl">https://api.pantrix.ai/api/v1/receipt/upload</code>
-            </div>
-            <button class="btn btn-glass btn-sm" id="copyCurlBtn">
-              <i class="fa-regular fa-copy"></i> Copy cURL
-            </button>
-          </div>
-
-          <div class="api-tabs-row">
-            <button class="api-tab-link active" data-tab="curl">cURL Command</button>
-            <button class="api-tab-link" data-tab="req">Request Payload</button>
-            <button class="api-tab-link" data-tab="res">Live JSON Response</button>
-          </div>
-
-          <div class="api-code-wrapper">
-            <pre class="api-code-block"><code id="apiCodeDisplay">curl -X POST "https://api.pantrix.ai/api/v1/receipt/upload" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: multipart/form-data" \
-  -F "file=@receipt_scan.jpg" \
-  -F "user_id=1"</code></pre>
-          </div>
-
-          <div class="api-pane-footer">
-            <div class="res-badge-status">
-              <span class="status-indicator-green"></span>
-              <span>HTTP 200 OK &bull; Response Time: 1,840ms</span>
-            </div>
-            <span class="api-schema-tag">Content-Type: application/json; charset=utf-8</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- Section 8: Project Progress & Milestone Roadmap -->
   <section class="roadmap-section" id="roadmap">
@@ -1748,7 +1661,7 @@ def preprocess_receipt(image_bytes):
         <div class="footer-links-col">
           <h5>Engineering Docs</h5>
           <ul>
-            <li><a href="#api-docs">API Explorer</a></li>
+            <li><a href="#pipeline">9-Stage Pipeline</a></li>
             <li><a href="#demo">Interactive Demo</a></li>
             <li><a href="#roadmap">Project Milestones</a></li>
             <li><a href="https://github.com/Uhashini/Pantrix-Website" target="_blank">GitHub Repository</a></li>
