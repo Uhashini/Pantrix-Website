@@ -13,6 +13,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initAnimeEngineSync();
+  initAnimeTextSplitter();
   initSvgMotionPaths();
   init3DPhoneTilt();
   initPipelineArchitecture();
@@ -494,7 +496,24 @@ function initPipelineArchitecture() {
     });
 
     if (stageNum) stageNum.textContent = `Stage 0${num} Deep Dive`;
-    if (stageTitle) stageTitle.textContent = data.title;
+    
+    // Anime.js v4 ScrambleText Effect
+    if (stageTitle) {
+      if (window.anime && typeof window.anime.scrambleText === 'function' && window.anime.animate) {
+        window.anime.animate(stageTitle, {
+          ...window.anime.scrambleText({
+            text: data.title,
+            chars: '0123456789ABCDEF$#@!%',
+            cursor: '_'
+          }),
+          duration: 650,
+          ease: 'outQuad'
+        });
+      } else {
+        stageTitle.textContent = data.title;
+      }
+    }
+
     if (techBadge) techBadge.innerHTML = data.tech;
     if (whyText) whyText.textContent = data.why;
     if (algoText) algoText.innerHTML = data.algo;
@@ -593,8 +612,32 @@ function initPipelineArchitecture() {
       if (simBtn) simBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run Live Pipeline Simulation';
       updateInspector(1, false);
       if (statusText) statusText.textContent = 'Ready: Click any stage to inspect';
+      triggerStageStagger();
     });
   }
+
+  // Anime.js v4 Stagger for the 9 Pipeline Stages & Stepper Pills
+  function triggerStageStagger() {
+    if (window.anime && typeof window.anime.stagger === 'function' && window.anime.animate) {
+      window.anime.animate('.pipeline-stages-stack .stage-card', {
+        opacity: [0.35, 1],
+        translateX: [-16, 0],
+        delay: window.anime.stagger(40, { start: 50 }),
+        duration: 450,
+        ease: 'outQuad'
+      });
+      window.anime.animate('.step-pill', {
+        opacity: [0.4, 1],
+        translateY: [-6, 0],
+        delay: window.anime.stagger(25),
+        duration: 350,
+        ease: 'outQuad'
+      });
+    }
+  }
+
+  // Trigger stage stagger on initial load
+  setTimeout(triggerStageStagger, 300);
 }
 
 /* ==========================================================================
@@ -911,4 +954,62 @@ function showToast(msg) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 2800);
+}
+
+/* ==========================================================================
+   8. ANIME.JS v4 TEXT SPLITTER (accessible: true)
+   Documentation: https://animejs.com/documentation/text/splittext/textsplitter-settings/accessible
+   ========================================================================== */
+function initAnimeTextSplitter() {
+  const animeObj = window.anime;
+  if (!animeObj || typeof animeObj.splitText !== 'function') return;
+
+  const heroHeading = document.querySelector('.hero-title');
+  if (heroHeading) {
+    try {
+      const split = animeObj.splitText(heroHeading, { split: 'words', accessible: true });
+      if (split && split.words && split.words.length && animeObj.animate) {
+        animeObj.animate(split.words, {
+          opacity: [0, 1],
+          translateY: [22, 0],
+          delay: animeObj.stagger(45, { start: 150 }),
+          duration: 650,
+          ease: 'outQuad'
+        });
+      }
+    } catch (e) {
+      console.warn('[Pantrix] splitText initialization fallback:', e);
+    }
+  }
+}
+
+/* ==========================================================================
+   9. ANIME.JS v4 ENGINE METHODS & SPEED/VISIBILITY (engine.update)
+   Documentation: https://animejs.com/documentation/engine/engine-methods/update
+   ========================================================================== */
+function initAnimeEngineSync() {
+  const animeObj = window.anime;
+  if (!animeObj || !animeObj.engine) return;
+
+  try {
+    // Utilize engine clock & precision
+    if (typeof animeObj.engine.timeUnit === 'function') {
+      animeObj.engine.timeUnit('ms');
+    }
+
+    // Auto pause/resume engine clock when tab visibility changes for zero background lag
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (typeof animeObj.engine.pause === 'function') {
+          animeObj.engine.pause();
+        }
+      } else {
+        if (typeof animeObj.engine.resume === 'function') {
+          animeObj.engine.resume();
+        }
+      }
+    });
+  } catch (e) {
+    console.warn('[Pantrix] Anime.js engine initialization:', e);
+  }
 }
