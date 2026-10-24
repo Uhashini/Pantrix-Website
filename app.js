@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPipelineArchitecture();
   initDemoShowcasePlayer();
   initMobileNav();
+  initScrollAnimationsAndSpy();
 });
 
 /* ==========================================================================
@@ -805,5 +806,71 @@ function initAnimeEngineSync() {
     });
   } catch (e) {
     console.warn('[Pantrix] Anime.js engine initialization:', e);
+  }
+}
+
+/* ==========================================================================
+   10. SCROLL PROGRESS, SCROLLSPY & UI REVEAL ANIMATIONS
+   ========================================================================== */
+function initScrollAnimationsAndSpy() {
+  const progressBar = document.getElementById('scrollProgressBar');
+  const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+  const sections = document.querySelectorAll('section[id], aside[id]');
+
+  // A. Scroll Progress Bar & ScrollSpy
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (progressBar && scrollHeight > 0) {
+      const pct = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+    }
+
+    // ScrollSpy: identify currently visible section
+    let currentId = '';
+    const scrollPos = scrollTop + 120; // offset for fixed header
+    sections.forEach((sec) => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }, { passive: true });
+
+  // B. Scroll Reveal Animations via IntersectionObserver
+  const revealElements = document.querySelectorAll(
+    '.section-heading-center, .capstone-banner, .persona-card, .comparison-col, .objective-card, .doc-card, .team-card, .advisor-spotlight-card, .roadmap-card'
+  );
+
+  revealElements.forEach((el) => el.classList.add('reveal-on-scroll'));
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1
+    });
+
+    revealElements.forEach((el) => observer.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('is-visible'));
   }
 }

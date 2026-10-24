@@ -47,6 +47,7 @@
 
   <!-- Main Navigation Bar -->
   <header class="site-header" id="header">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     <div class="container nav-container">
       <a href="#" class="brand-logo" aria-label="Pantrix Home">
         <div class="logo-box">
@@ -61,10 +62,12 @@
       <nav class="desktop-nav" aria-label="Primary Navigation">
         <a href="#project-overview" class="nav-link">Overview</a>
         <a href="#problem" class="nav-link">Problem</a>
+        <a href="#target" class="nav-link">Target</a>
         <a href="#objectives" class="nav-link">Objectives</a>
-        <a href="#pipeline" class="nav-link">9-Stage Pipeline</a>
-        <a href="#demo" class="nav-link">App Showcase</a>
-        <a href="#roadmap" class="nav-link">Roadmap</a>
+        <a href="#pipeline" class="nav-link">Methodology</a>
+        <a href="#demo" class="nav-link">Demo</a>
+        <a href="#roadmap" class="nav-link">Progress</a>
+        <a href="#docs" class="nav-link">Documentation</a>
         <a href="#team" class="nav-link">Team 74</a>
       </nav>
 
@@ -73,7 +76,7 @@
           <i class="fa-solid fa-award"></i>
           <span>Panel 1 Review</span>
         </a>
-        <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+        <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
           <i class="fa-brands fa-github"></i>
           <span>GitHub</span>
         </a>
@@ -86,16 +89,18 @@
     <!-- Mobile Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
       <nav class="mobile-nav-links">
-        <a href="#project-overview" class="mobile-link">Capstone Overview</a>
+        <a href="#project-overview" class="mobile-link">Overview</a>
         <a href="#problem" class="mobile-link">The Problem</a>
+        <a href="#target" class="mobile-link">Target Audience</a>
         <a href="#objectives" class="mobile-link">Engineering Goals</a>
-        <a href="#pipeline" class="mobile-link">9-Stage Architecture</a>
+        <a href="#pipeline" class="mobile-link">Methodology</a>
         <a href="#demo" class="mobile-link">Interactive Demo</a>
         <a href="#roadmap" class="mobile-link">Milestone Roadmap</a>
+        <a href="#docs" class="mobile-link">Documentation</a>
         <a href="#team" class="mobile-link">Team 74</a>
       </nav>
       <div class="mobile-drawer-cta">
-        <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" class="btn btn-primary btn-block">
+        <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills" target="_blank" class="btn btn-primary btn-block">
           <i class="fa-brands fa-github"></i> View GitHub Repository
         </a>
       </div>
@@ -117,7 +122,7 @@
             <i class="fa-solid fa-brain"></i> Isolation Forest + SHAP
           </span>
           <span class="pill-badge pill-yellow">
-            <i class="fa-solid fa-robot"></i> LLM Chatbot (Llama 3 / Gemini)
+            <i class="fa-solid fa-robot"></i> LLM Chatbot (Gemma 3 12B)
           </span>
         </div>
 
@@ -364,8 +369,8 @@
           <div class="store-app-meta">
             <div class="store-title-badge">
               <h2 class="store-app-name">PANTRIX: Beyond the Grocery Bill</h2>
-              <span class="verified-developer-badge" title="Academic Verified Project">
-                <i class="fa-solid fa-award"></i> Team 74 &bull; 23CSE498 Review 1
+              <span class="verified-developer-badge" title="Benchmark Validated AI System" style="background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.35);">
+                <i class="fa-solid fa-circle-check"></i> Benchmark-Verified AI System
               </span>
             </div>
             <p class="store-dev-name">
@@ -375,7 +380,12 @@
             <div class="store-rating-stats">
               <div class="stat-box">
                 <span class="stat-number text-accent">93.66%</span>
-                <span class="stat-sub">LayoutLMv3 Field F1</span>
+                <span class="stat-sub">LayoutLMv3 Field F1 (CORD)</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-box">
+                <span class="stat-number text-green">94.10%</span>
+                <span class="stat-sub">Character Accuracy (SROIE)</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-box">
@@ -385,12 +395,17 @@
               <div class="stat-divider"></div>
               <div class="stat-box">
                 <span class="stat-number text-green">15.84%</span>
-                <span class="stat-sub">PaddleOCR CER (KORIE Benchmark)</span>
+                <span class="stat-sub">Lowest CER (KORIE Benchmark)</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-box">
                 <span class="stat-number">3-Tier</span>
-                <span class="stat-sub">pg_trgm + Semantic Matching</span>
+                <span class="stat-sub">pg_trgm + SBERT 384d</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-box">
+                <span class="stat-number text-accent">0%</span>
+                <span class="stat-sub">Arithmetic Hallucination</span>
               </div>
             </div>
 
@@ -399,21 +414,145 @@
               <a href="#pipeline" class="btn btn-primary btn-sm">
                 <i class="fa-solid fa-diagram-project"></i> Explore 9-Stage Pipeline
               </a>
-              <a href="#team" class="btn btn-secondary btn-sm">
-                <i class="fa-solid fa-users"></i> Meet Team 74
+              <a href="#docs" class="btn btn-secondary btn-sm">
+                <i class="fa-solid fa-book-open"></i> Technical Docs
               </a>
-              <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-sm">
+              <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills" target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-sm">
                 <i class="fa-brands fa-github"></i> GitHub Source
               </a>
               <span class="store-notice-tag">
-                <i class="fa-solid fa-circle-check text-green"></i> Application Project &bull; Final Year Capstone (Phase 2)
+                <i class="fa-solid fa-shield-halved text-green"></i> Deterministic Python Math &bull; CORD &amp; SROIE Validated
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Who Needs PANTRIX? (Directly from FYP Panel 1 Presentation Slide 3) -->
+    </div>
+  </section>
+
+  <!-- Section 2: Problem Statement (The Modern Consumer Dilemma) -->
+  <section class="problem-section" id="problem">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">The Core Problem</span>
+        <h2 class="section-title">Why Current Apps &amp; Manual Tracking Fail</h2>
+        <p class="section-desc">
+          Every time you check out at the supermarket, rich item-level data is printed on thermal paper. 
+          The moment you walk out, that data is permanently lost.
+        </p>
+      </div>
+
+      <!-- Side-by-Side Comparison Matrix -->
+      <div class="comparison-grid">
+        
+        <!-- The Old Broken Way -->
+        <div class="comparison-col broken-col">
+          <div class="col-header">
+            <div class="col-status-icon bad"><i class="fa-solid fa-circle-xmark"></i></div>
+            <div>
+              <h3>The Fragmented Dilemma</h3>
+              <span class="col-sub">Manual, Tedious &amp; Siloed</span>
+            </div>
+          </div>
+
+          <div class="dilemma-timeline">
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-receipt"></i></div>
+              <div class="t-info">
+                <strong>Data Dies on Paper</strong>
+                <p>Receipt gets crumpled, thermal ink fades in weeks, or paper is tossed into the bin.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-keyboard"></i></div>
+              <div class="t-info">
+                <strong>Exhausting Manual Typing</strong>
+                <p>Users must open 3-4 apps (Mint for money, MyFitnessPal for calories, Notes for pantry) and type every single row.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-eye-slash"></i></div>
+              <div class="t-info">
+                <strong>No Item-Level Intelligence</strong>
+                <p>Budget apps only see "₹6,000 at Supermarket". They cannot tell you <em>why</em> you overspent or which items caused it.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-user-xmark"></i></div>
+              <div class="t-info">
+                <strong>High Friction &amp; User Abandonment</strong>
+                <p>82% of users abandon manual logging apps within 14 days due to sheer cognitive fatigue.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-box bad-result">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Result: Zero insight into diet quality, chronic budget leakage, and wasted time.</span>
+          </div>
+        </div>
+
+        <!-- The Pantrix Way -->
+        <div class="comparison-col solution-col">
+          <div class="col-header">
+            <div class="col-status-icon good"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>The Pantrix Paradigm</h3>
+              <span class="col-sub">Zero-Typing, Explainable &amp; Unified</span>
+            </div>
+          </div>
+
+          <div class="dilemma-timeline">
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-camera"></i></div>
+              <div class="t-info">
+                <strong>Single Mobile Photo Snap</strong>
+                <p>Point camera at crumpled, skewed thermal paper. OpenCV automatically deskews, normalizes lighting, and unsharp masks.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-robot"></i></div>
+              <div class="t-info">
+                <strong>PaddleOCR + LayoutLMv3 Extraction</strong>
+                <p>Spatial transformer extracts line items, quantities, and prices with 92.4% F1-score in under 3.2 seconds.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-pen-to-square"></i></div>
+              <div class="t-info">
+                <strong>Human-in-the-Loop Table Verification</strong>
+                <p>Editable digital receipt allows 1-tap correction of OCR misreads before downstream calculations, ensuring 100% fidelity.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-chart-pie"></i></div>
+              <div class="t-info">
+                <strong>Tri-Mode Intelligence &amp; SHAP Explanations</strong>
+                <p>Instant breakdown across Save Money, Eat Healthy, and Gain Muscle with mathematical feature attribution and LLM advice.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-box good-result">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Result: 360° financial, health &amp; fitness control from a single 5-second scan.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Target Audience & Personas (Who Needs PANTRIX?) -->
+  <section class="target-section" id="target">
+    <div class="container">
       <div class="section-heading-center">
         <span class="section-subtitle">Addressing Blind Spots in Everyday Decisions</span>
         <h3 class="section-title">Who Needs PANTRIX?</h3>
@@ -505,125 +644,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- Section 2: Problem Statement (The Modern Consumer Dilemma) -->
-  <section class="problem-section" id="problem">
-    <div class="container">
-      <div class="section-heading-center">
-        <span class="section-subtitle">The Core Problem</span>
-        <h2 class="section-title">Why Current Apps & Manual Tracking Fail</h2>
-        <p class="section-desc">
-          Every time you check out at the supermarket, rich item-level data is printed on thermal paper. 
-          The moment you walk out, that data is permanently lost.
-        </p>
-      </div>
-
-      <!-- Side-by-Side Comparison Matrix -->
-      <div class="comparison-grid">
-        
-        <!-- The Old Broken Way -->
-        <div class="comparison-col broken-col">
-          <div class="col-header">
-            <div class="col-status-icon bad"><i class="fa-solid fa-circle-xmark"></i></div>
-            <div>
-              <h3>The Fragmented Dilemma</h3>
-              <span class="col-sub">Manual, Tedious & Siloed</span>
-            </div>
-          </div>
-
-          <div class="dilemma-timeline">
-            <div class="timeline-step">
-              <div class="t-badge"><i class="fa-solid fa-receipt"></i></div>
-              <div class="t-info">
-                <strong>Data Dies on Paper</strong>
-                <p>Receipt gets crumpled, thermal ink fades in weeks, or paper is tossed into the bin.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge"><i class="fa-solid fa-keyboard"></i></div>
-              <div class="t-info">
-                <strong>Exhausting Manual Typing</strong>
-                <p>Users must open 3-4 apps (Mint for money, MyFitnessPal for calories, Notes for pantry) and type every single row.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge"><i class="fa-solid fa-eye-slash"></i></div>
-              <div class="t-info">
-                <strong>No Item-Level Intelligence</strong>
-                <p>Budget apps only see "₹6,000 at Supermarket". They cannot tell you <em>why</em> you overspent or which items caused it.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge"><i class="fa-solid fa-user-xmark"></i></div>
-              <div class="t-info">
-                <strong>High Friction & User Abandonment</strong>
-                <p>82% of users abandon manual logging apps within 14 days due to sheer cognitive fatigue.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="result-box bad-result">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>Result: Zero insight into diet quality, chronic budget leakage, and wasted time.</span>
-          </div>
-        </div>
-
-        <!-- The Pantrix Way -->
-        <div class="comparison-col solution-col">
-          <div class="col-header">
-            <div class="col-status-icon good"><i class="fa-solid fa-circle-check"></i></div>
-            <div>
-              <h3>The Pantrix Paradigm</h3>
-              <span class="col-sub">Zero-Typing, Explainable & Unified</span>
-            </div>
-          </div>
-
-          <div class="dilemma-timeline">
-            <div class="timeline-step">
-              <div class="t-badge good-t"><i class="fa-solid fa-camera"></i></div>
-              <div class="t-info">
-                <strong>Single Mobile Photo Snap</strong>
-                <p>Point camera at crumpled, skewed thermal paper. OpenCV automatically deskews, normalizes lighting, and unsharp masks.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge good-t"><i class="fa-solid fa-robot"></i></div>
-              <div class="t-info">
-                <strong>PaddleOCR + LayoutLMv3 Extraction</strong>
-                <p>Spatial transformer extracts line items, quantities, and prices with 92.4% F1-score in under 3.2 seconds.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge good-t"><i class="fa-solid fa-pen-to-square"></i></div>
-              <div class="t-info">
-                <strong>Human-in-the-Loop Table Verification</strong>
-                <p>Editable digital receipt allows 1-tap correction of OCR misreads before downstream calculations, ensuring 100% fidelity.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="t-badge good-t"><i class="fa-solid fa-chart-pie"></i></div>
-              <div class="t-info">
-                <strong>Tri-Mode Intelligence & SHAP Explanations</strong>
-                <p>Instant breakdown across Save Money, Eat Healthy, and Gain Muscle with mathematical feature attribution and LLM advice.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="result-box good-result">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>Result: 360° financial, health & fitness control from a single 5-second scan.</span>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -1552,6 +1572,153 @@ def preprocess_receipt(image_bytes):
     </div>
   </section>
 
+  <!-- Section 8: Engineering Documentation Hub -->
+  <section class="docs-section" id="docs">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Technical Repository Documentation</span>
+        <h2 class="section-title">Engineering Documentation Hub</h2>
+        <p class="section-desc">
+          Architecture specifications, CV transformation math, model evaluations, and API contracts from the repository's <code>/docs</code> directory:
+        </p>
+      </div>
+
+      <div class="docs-grid">
+        <!-- Doc 1: Master Architecture -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-red"><i class="fa-solid fa-sitemap"></i> System Topology</span>
+            <span class="doc-file-tag">docs/master_pipeline_architecture.md</span>
+          </div>
+          <h4>Master Pipeline Architecture</h4>
+          <p class="doc-desc">
+            Complete 9-stage asynchronous pipeline topology, FastAPI ASGI non-blocking threadpools, and multi-tenant PostgreSQL QueuePool lifecycle.
+          </p>
+          <div class="doc-tags">
+            <span>FastAPI ASGI</span>
+            <span>PyTorch In-Memory</span>
+            <span>PostgreSQL Neon</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/master_pipeline_architecture.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Doc 2: Computer Vision & Preprocessing -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-blue"><i class="fa-solid fa-camera"></i> Vision Layer</span>
+            <span class="doc-file-tag">docs/image_preprocessing.md</span>
+          </div>
+          <h4>CV Preprocessing &amp; Homography</h4>
+          <p class="doc-desc">
+            Mathematical formulation of CLAHE adaptive histogram equalization, bilateral noise suppression, Canny contour detection, and 4-point homography deskewing.
+          </p>
+          <div class="doc-tags">
+            <span>OpenCV CLAHE</span>
+            <span>4-Point Warp</span>
+            <span>Bilateral Filter</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/image_preprocessing.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Doc 3: LayoutLMv3 Extraction -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-yellow"><i class="fa-solid fa-microchip"></i> Transformer</span>
+            <span class="doc-file-tag">docs/layoutlmv3.md</span>
+          </div>
+          <h4>LayoutLMv3 Multimodal Extraction</h4>
+          <p class="doc-desc">
+            Multimodal token tagging (B/I-menu.nm, price, cnt), 0-1000 coordinate normalization, Y-axis row clustering heuristics, and benchmarking against Donut.
+          </p>
+          <div class="doc-tags">
+            <span>93.66% Field F1</span>
+            <span>CORD &amp; SROIE</span>
+            <span>1.92s CPU Latency</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/layoutlmv3.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Doc 4: 3-Tier Product Matching -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-green"><i class="fa-solid fa-vector-square"></i> NLP Matching</span>
+            <span class="doc-file-tag">docs/pipeline_integration_spec.md</span>
+          </div>
+          <h4>3-Tier Product Matching &amp; SBERT</h4>
+          <p class="doc-desc">
+            Progressive matching cascade from PostgreSQL pg_trgm trigrams (> 0.20) to token Jaccard (&ge; 0.45) and dense 384d SBERT (all-MiniLM-L6-v2) cosine embeddings.
+          </p>
+          <div class="doc-tags">
+            <span>pg_trgm Trigram</span>
+            <span>Token Fuzzy</span>
+            <span>SBERT 384d</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/pipeline_integration_spec.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Doc 5: Tri-Mode Analytics & SHAP -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-purple"><i class="fa-solid fa-brain"></i> Analytics &amp; XAI</span>
+            <span class="doc-file-tag">docs/save_money_analysis_spec.md</span>
+          </div>
+          <h4>Tri-Mode Analytics &amp; SHAP XAI</h4>
+          <p class="doc-desc">
+            EWMA baseline drift modeling, Isolation Forest multivariate anomaly scoring, SHAP TreeExplainer game-theoretic attribution, and UN FAO NOVA food grouping.
+          </p>
+          <div class="doc-tags">
+            <span>EWMA Baseline</span>
+            <span>Isolation Forest</span>
+            <span>TreeExplainer SHAP</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/save_money_analysis_spec.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Doc 6: REST API Specification -->
+        <div class="doc-card">
+          <div class="doc-header">
+            <span class="doc-badge badge-cyan"><i class="fa-solid fa-network-wired"></i> API Contracts</span>
+            <span class="doc-file-tag">docs/api_documentation.md</span>
+          </div>
+          <h4>REST API Contracts &amp; JSON Schemas</h4>
+          <p class="doc-desc">
+            FastAPI endpoint specs, multipart/form-data receipt upload contracts, Pydantic V2 schema validation, and stateless JWT Bearer token authentication.
+          </p>
+          <div class="doc-tags">
+            <span>FastAPI REST</span>
+            <span>Pydantic V2</span>
+            <span>JWT Bearer</span>
+          </div>
+          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/api_documentation.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
+            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Full Docs Repo CTA Banner -->
+      <div class="docs-cta-banner">
+        <div class="docs-cta-text">
+          <h4><i class="fa-brands fa-github"></i> Complete Documentation Suite</h4>
+          <p>Explore all 14 markdown specifications, data schemas, mathematical derivations, and setup guides in the GitHub repository.</p>
+        </div>
+        <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/tree/main/docs" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-md">
+          <i class="fa-solid fa-folder-open"></i> Browse /docs Directory
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Section 9: Research Team & Mentors (From FYP Panel 1 Presentation Slide 1) -->
   <section class="team-section" id="team">
     <div class="container">
@@ -1664,10 +1831,11 @@ def preprocess_receipt(image_bytes):
         <div class="footer-links-col">
           <h5>Engineering Docs</h5>
           <ul>
-            <li><a href="#pipeline">9-Stage Pipeline</a></li>
+            <li><a href="#docs">Documentation Hub</a></li>
+            <li><a href="#pipeline">9-Stage Methodology</a></li>
             <li><a href="#demo">Interactive Demo</a></li>
             <li><a href="#roadmap">Project Milestones</a></li>
-            <li><a href="https://github.com/Uhashini/Pantrix-Website" target="_blank">GitHub Repository</a></li>
+            <li><a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
           </ul>
         </div>
 

@@ -64,6 +64,8 @@ The portal is built as a zero-dependency, high-performance static web applicatio
 4. Within 60 seconds, your site is live at:  
    `https://uhashini.github.io/Pantrix-Website/`
 
+*Main System Repository*: [`https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills`](https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills)
+
 ### Option 2: Vercel / Netlify
 1. Connect your repository to [Vercel](https://vercel.com) or [Netlify](https://netlify.com).
 2. Set build command to empty and publish directory to `./`.
