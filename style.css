@@ -78,9 +78,15 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1540px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 3rem;
+}
+
+.site-header .container,
+.announcement-bar .container {
+  max-width: 1680px;
+  padding: 0 2.5rem;
 }
 
 /* Ambient Glowing Orbs */
@@ -459,7 +465,7 @@ body {
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 2.2rem;
-  max-width: 620px;
+  max-width: 760px;
 }
 
 .hero-lead strong {
@@ -488,7 +494,7 @@ body {
   border-radius: var(--radius-md);
   padding: 1rem 1.5rem;
   margin-bottom: 1.8rem;
-  max-width: 620px;
+  max-width: 760px;
 }
 
 .hero-metric-item {

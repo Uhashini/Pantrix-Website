@@ -14,7 +14,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initAnimeEngineSync();
-  initAnimeTextSplitter();
   initSvgMotionPaths();
   init3DPhoneTilt();
   initPipelineArchitecture();
@@ -934,32 +933,7 @@ function showToast(msg) {
   }, 2800);
 }
 
-/* ==========================================================================
-   8. ANIME.JS v4 TEXT SPLITTER (accessible: true)
-   Documentation: https://animejs.com/documentation/text/splittext/textsplitter-settings/accessible
-   ========================================================================== */
-function initAnimeTextSplitter() {
-  const animeObj = window.anime;
-  if (!animeObj || typeof animeObj.splitText !== 'function') return;
 
-  const heroHeading = document.querySelector('.hero-title');
-  if (heroHeading) {
-    try {
-      const split = animeObj.splitText(heroHeading, { split: 'words', accessible: true });
-      if (split && split.words && split.words.length && animeObj.animate) {
-        animeObj.animate(split.words, {
-          opacity: [0, 1],
-          translateY: [22, 0],
-          delay: animeObj.stagger(45, { start: 150 }),
-          duration: 650,
-          ease: 'outQuad'
-        });
-      }
-    } catch (e) {
-      console.warn('[Pantrix] splitText initialization fallback:', e);
-    }
-  }
-}
 
 /* ==========================================================================
    9. ANIME.JS v4 ENGINE METHODS & SPEED/VISIBILITY (engine.update)
