@@ -2596,12 +2596,144 @@ body {
   padding-left: 10px;
 }
 
-.ib-header {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 6px;
+/* Auth Mock */
+.auth-mock {
+  background: #14131a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 280px;
+  margin: 0 auto;
 }
+.mock-auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.auth-input-group label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.auth-input-mock {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.72rem;
+  color: #fff;
+}
+.btn-auth-mock {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Onboarding Mock */
+.onboarding-mock {
+  background: #14131a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.mock-chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0;
+}
+.onboarding-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  color: #ccc;
+}
+.onboarding-chip.selected {
+  background: rgba(148, 182, 239, 0.25);
+  border-color: var(--secondary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Matching Mock */
+.matching-mock {
+  background: #14131a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.match-pair-row {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.raw-ocr-text {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: #ff6b6b;
+  margin-bottom: 2px;
+}
+.canonical-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.match-badge {
+  font-size: 0.62rem;
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Multi-Mode Analytics Mock */
+.analytics-mock {
+  background: #14131a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.analytics-row-card {
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+}
+.card-money { background: rgba(153, 8, 8, 0.18); border-left: 3px solid var(--primary); }
+.card-health { background: rgba(148, 182, 239, 0.15); border-left: 3px solid var(--secondary); }
+.card-muscle { background: rgba(230, 226, 121, 0.15); border-left: 3px solid var(--accent); }
 
 .mock-insight-bubble p {
   font-size: 0.75rem;
@@ -2698,7 +2830,8 @@ body {
   background: none;
   border: none;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.1rem 1.25rem;
   display: flex;
   align-items: flex-start;
   gap: 0.85rem;

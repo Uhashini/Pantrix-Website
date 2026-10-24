@@ -655,10 +655,12 @@ function initDemoShowcasePlayer() {
   const slides = document.querySelectorAll('.demo-slide');
   const chapterBtns = document.querySelectorAll('.chapter-btn');
   const playBtn = document.getElementById('demoPlayBtn');
+  const prevBtn = document.getElementById('demoPrevBtn');
   const nextBtn = document.getElementById('demoNextBtn');
   const progressBar = document.getElementById('demoTimelineProgress');
   const timeText = document.getElementById('demoTimeText');
 
+  const TOTAL_CHAPTERS = 8;
   let currentChapter = 1;
   let isPlaying = true;
   let autoPlayTimer = null;
@@ -671,11 +673,22 @@ function initDemoShowcasePlayer() {
     const activeSlide = document.querySelector(`.demo-slide[data-chapter="${num}"]`);
     const activeBtn = document.querySelector(`.chapter-btn[data-target-chapter="${num}"]`);
 
-    if (activeSlide) activeSlide.classList.add('active');
+    if (activeSlide) {
+      activeSlide.classList.add('active');
+      // Subtle pulse or entry stagger if Anime.js available
+      if (window.anime && window.anime.animate) {
+        window.anime.animate(activeSlide, {
+          opacity: [0.75, 1],
+          scale: [0.985, 1],
+          duration: 350,
+          ease: 'outQuad'
+        });
+      }
+    }
     if (activeBtn) activeBtn.classList.add('active');
 
-    if (timeText) timeText.textContent = `0${num} / 04`;
-    if (progressBar) progressBar.style.width = `${(num / 4) * 100}%`;
+    if (timeText) timeText.textContent = `0${num} / 08`;
+    if (progressBar) progressBar.style.width = `${(num / TOTAL_CHAPTERS) * 100}%`;
   }
 
   chapterBtns.forEach((btn) => {
@@ -686,8 +699,9 @@ function initDemoShowcasePlayer() {
   });
 
   function startAutoPlay() {
+    stopAutoPlay();
     autoPlayTimer = setInterval(() => {
-      currentChapter = currentChapter >= 4 ? 1 : currentChapter + 1;
+      currentChapter = currentChapter >= TOTAL_CHAPTERS ? 1 : currentChapter + 1;
       setChapter(currentChapter);
     }, 4500);
   }
@@ -710,9 +724,16 @@ function initDemoShowcasePlayer() {
     });
   }
 
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentChapter = currentChapter <= 1 ? TOTAL_CHAPTERS : currentChapter - 1;
+      setChapter(currentChapter);
+    });
+  }
+
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      currentChapter = currentChapter >= 4 ? 1 : currentChapter + 1;
+      currentChapter = currentChapter >= TOTAL_CHAPTERS ? 1 : currentChapter + 1;
       setChapter(currentChapter);
     });
   }

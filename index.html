@@ -1071,9 +1071,90 @@ def preprocess_receipt(image_bytes):
           <!-- Mock Video Screen / Animation Canvas -->
           <div class="demo-screen-canvas" id="demoCanvas">
             
-            <!-- Chapter 1 Demo Slide -->
+            <!-- Chapter 1 Demo Slide: Login & Registration -->
             <div class="demo-slide active" data-chapter="1">
-              <div class="slide-badge"><i class="fa-solid fa-camera"></i> Chapter 01: Capture &amp; Preprocessing</div>
+              <div class="slide-badge"><i class="fa-solid fa-user-lock"></i> Chapter 01: Login &amp; Registration</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock auth-mock">
+                  <div class="mock-auth-card">
+                    <div style="text-align: center; margin-bottom: 4px;">
+                      <i class="fa-solid fa-fingerprint text-accent" style="font-size: 1.6rem;"></i>
+                      <h5 style="color: #fff; margin-top: 4px; font-size: 0.85rem;">Sign In to Pantrix</h5>
+                    </div>
+                    <div class="auth-input-group">
+                      <label>College / Personal Email</label>
+                      <div class="auth-input-mock">student@amrita.edu</div>
+                    </div>
+                    <div class="auth-input-group">
+                      <label>Password</label>
+                      <div class="auth-input-mock">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+                    </div>
+                    <button class="btn-auth-mock"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In / Register</button>
+                    <div style="display:flex; justify-content:space-between; font-size:0.62rem; color:var(--text-dim); margin-top:4px;">
+                      <span><i class="fa-solid fa-shield-halved text-green"></i> 256-bit JWT Auth</span>
+                      <span>Google OAuth 2.0</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Secure Authentication &amp; Profile Provisioning</h4>
+                  <p>
+                    Users start by logging in or registering with JWT-backed authentication or Google OAuth. 
+                    Personalized preferences, receipt histories, and baseline financial curves are encrypted 
+                    and securely tied to the user profile with zero telemetry ad tracking.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-lock"></i> JWT Token Auth</span>
+                    <span class="p-pill"><i class="fa-solid fa-fingerprint"></i> Biometric Sign-In</span>
+                    <span class="p-pill"><i class="fa-solid fa-shield"></i> Zero Telemetry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 2 Demo Slide: Onboarding Questions & Preferences -->
+            <div class="demo-slide" data-chapter="2">
+              <div class="slide-badge"><i class="fa-solid fa-sliders"></i> Chapter 02: Onboarding &amp; Lifestyle Preferences</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock onboarding-mock">
+                  <div class="mock-auth-card">
+                    <span style="font-size: 0.72rem; color: var(--secondary); font-weight: 700;">STEP 2 OF 2: PREFERENCES</span>
+                    <p style="font-size: 0.68rem; color: #bbb; margin-bottom: 2px;">Select Primary Goals:</p>
+                    <div class="mock-chips-group">
+                      <span class="onboarding-chip selected"><i class="fa-solid fa-check text-green"></i> Save Money</span>
+                      <span class="onboarding-chip selected"><i class="fa-solid fa-check text-green"></i> Eat Healthy</span>
+                      <span class="onboarding-chip selected"><i class="fa-solid fa-check text-green"></i> Gain Muscle</span>
+                    </div>
+                    <p style="font-size: 0.68rem; color: #bbb; margin-top: 4px;">Dietary Framework:</p>
+                    <div class="mock-chips-group">
+                      <span class="onboarding-chip selected">High-Protein</span>
+                      <span class="onboarding-chip">Vegetarian</span>
+                      <span class="onboarding-chip">Non-Veg</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 6px; border-radius: 6px; margin-top: 4px; font-size: 0.68rem;">
+                      <span>Monthly Budget Target: <strong>₹6,000</strong></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Adaptive Lifestyle &amp; Dietary Calibration</h4>
+                  <p>
+                    Before their first grocery scan, users answer onboarding questions: target monthly expenditure, 
+                    dietary constraints (e.g. Vegetarian, High-Protein, Low-Sodium), and fitness targets (e.g. 150g protein/day). 
+                    These personal baselines seed the downstream EWMA, NOVA, and SHAP models.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-piggy-bank"></i> Budget Baselines</span>
+                    <span class="p-pill"><i class="fa-solid fa-leaf"></i> Dietary Constraints</span>
+                    <span class="p-pill"><i class="fa-solid fa-dumbbell"></i> Daily Macro Targets</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 3 Demo Slide: Camera Scan & Upload -->
+            <div class="demo-slide" data-chapter="3">
+              <div class="slide-badge"><i class="fa-solid fa-camera"></i> Chapter 03: Camera Scan &amp; Upload</div>
               <div class="slide-visual-flex">
                 <div class="receipt-frame-mock">
                   <img src="assets/sample-receipt.jpg" alt="Sample Raw Receipt" class="demo-receipt-img">
@@ -1083,49 +1164,54 @@ def preprocess_receipt(image_bytes):
                   <div class="demo-bbox bbox-3"></div>
                 </div>
                 <div class="demo-slide-info">
-                  <h4>Real-Time Dewarping &amp; Text Detection</h4>
+                  <h4>Camera Capture &amp; Perspective Dewarping</h4>
                   <p>
-                    When the mobile camera shutter triggers, OpenCV checks document four-corner contours. 
-                    Uneven kitchen light is normalized with CLAHE before PaddleOCR identifies all ink polygons in 840ms.
+                    Users snap a photo of any crumpled physical store bill or upload an existing image from the gallery. 
+                    OpenCV instantly detects document corners via Canny contour approximations, performs 4-point homography 
+                    perspective warp, and equalizes uneven kitchen shadows via CLAHE.
                   </p>
                   <div class="demo-stats-pills">
-                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> OpenCV Warp: 110ms</span>
-                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> DB-Net Detection: 380ms</span>
-                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> CRNN Recognition: 460ms</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> 4-Point Homography</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> CLAHE Equalization</span>
+                    <span class="p-pill"><i class="fa-solid fa-image"></i> Gallery Upload Support</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Chapter 2 Demo Slide -->
-            <div class="demo-slide" data-chapter="2">
-              <div class="slide-badge"><i class="fa-solid fa-layer-group"></i> Chapter 02: LayoutLMv3 Token Extraction</div>
+            <!-- Chapter 4 Demo Slide: LayoutLMv3 Token Extraction -->
+            <div class="demo-slide" data-chapter="4">
+              <div class="slide-badge"><i class="fa-solid fa-layer-group"></i> Chapter 04: PaddleOCR + LayoutLMv3 Extraction</div>
               <div class="slide-visual-flex">
                 <div class="receipt-frame-mock layoutlm-grid">
-                  <div class="token-chip token-item">menu.nm &bull; Amul Milk</div>
-                  <div class="token-chip token-qty">menu.cnt &bull; 2L</div>
-                  <div class="token-chip token-price">menu.price &bull; ₹124</div>
-                  <div class="token-chip token-item">menu.nm &bull; Chicken</div>
-                  <div class="token-chip token-price">menu.price &bull; ₹310</div>
-                  <div class="token-chip token-subtotal">subtotal &bull; ₹434</div>
+                  <div class="token-chip token-item">menu.nm &bull; Amul Fresh Milk 1L</div>
+                  <div class="token-chip token-qty">menu.cnt &bull; 2</div>
+                  <div class="token-chip token-price">menu.price &bull; ₹124.00</div>
+                  <div class="token-chip token-item">menu.nm &bull; Farm Fresh Eggs (6pk)</div>
+                  <div class="token-chip token-price">menu.price &bull; ₹75.00</div>
+                  <div class="token-chip token-item">menu.nm &bull; Chicken Breast 500g</div>
+                  <div class="token-chip token-price">menu.price &bull; ₹310.00</div>
+                  <div class="token-chip token-subtotal">subtotal &bull; ₹509.00</div>
                 </div>
                 <div class="demo-slide-info">
                   <h4>Multimodal Spatial Transformer</h4>
                   <p>
-                    LayoutLMv3 reads not just the text characters, but their 0-1000 coordinate positions and image patches. 
-                    It aligns prices to their corresponding item names using Y-axis spatial clustering.
+                    PaddleOCR (DB-Net + CRNN) decodes text polygons, then fine-tuned LayoutLMv3 fuses 2D bounding-box spatial 
+                    positions with visual image patches. It maps item descriptions directly to quantities and prices with 93.66% F1 accuracy, 
+                    preventing misaligned columns and OCR slip.
                   </p>
                   <div class="demo-stats-pills">
-                    <span class="p-pill"><i class="fa-solid fa-check"></i> Entity F1: 92.4%</span>
-                    <span class="p-pill"><i class="fa-solid fa-check"></i> Zero OCR column slip</span>
+                    <span class="p-pill"><i class="fa-solid fa-check"></i> 93.66% Entity F1</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> 1.92s CPU Latency</span>
+                    <span class="p-pill"><i class="fa-solid fa-microchip"></i> PaddleOCR + LayoutLMv3</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Chapter 3 Demo Slide -->
-            <div class="demo-slide" data-chapter="3">
-              <div class="slide-badge"><i class="fa-solid fa-pen-to-square"></i> Chapter 03: Human-in-the-Loop Verification</div>
+            <!-- Chapter 5 Demo Slide: Human-in-the-Loop Verification -->
+            <div class="demo-slide" data-chapter="5">
+              <div class="slide-badge"><i class="fa-solid fa-pen-to-square"></i> Chapter 05: Human Verification Table</div>
               <div class="slide-visual-flex">
                 <div class="receipt-frame-mock table-mock">
                   <table class="mock-data-table">
@@ -1140,6 +1226,12 @@ def preprocess_receipt(image_bytes):
                         <td><span class="status-verified"><i class="fa-solid fa-check"></i></span></td>
                       </tr>
                       <tr>
+                        <td class="editable-cell">Fresh Eggs 6pk <i class="fa-solid fa-pencil text-red"></i></td>
+                        <td>1</td>
+                        <td>₹75</td>
+                        <td><span class="status-verified"><i class="fa-solid fa-check"></i></span></td>
+                      </tr>
+                      <tr>
                         <td class="editable-cell">Chicken Breast <i class="fa-solid fa-pencil text-red"></i></td>
                         <td>500g</td>
                         <td>₹310</td>
@@ -1147,40 +1239,139 @@ def preprocess_receipt(image_bytes):
                       </tr>
                     </tbody>
                   </table>
+                  <div style="margin-top: 8px; text-align: center;">
+                    <span style="font-size: 0.65rem; background: #27ae60; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 600;">
+                      <i class="fa-solid fa-circle-check"></i> Verified by User
+                    </span>
+                  </div>
                 </div>
                 <div class="demo-slide-info">
                   <h4>100% Fidelity Before Math Execution</h4>
                   <p>
                     Unlike blind AI systems that guess incorrectly, Pantrix renders an editable tabular UI in the mobile app. 
-                    Users can tap any row to fix a typo in 2 seconds before downstream databases calculate macros.
+                    Users can tap any row to fix a typo or adjust quantities in under 2 seconds, guaranteeing 100% data fidelity 
+                    before downstream nutritional databases or EWMA budgets run.
                   </p>
                   <div class="demo-stats-pills">
-                    <span class="p-pill"><i class="fa-solid fa-hand-pointer"></i> &lt; 2 Clicks To Correct</span>
-                    <span class="p-pill"><i class="fa-solid fa-database"></i> SQLite Local Backup</span>
+                    <span class="p-pill"><i class="fa-solid fa-hand-pointer"></i> 1-Tap Inline Correction</span>
+                    <span class="p-pill"><i class="fa-solid fa-database"></i> SQLite Offline Cache</span>
+                    <span class="p-pill"><i class="fa-solid fa-shield"></i> Zero Error Propagation</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Chapter 4 Demo Slide -->
-            <div class="demo-slide" data-chapter="4">
-              <div class="slide-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Chapter 04: SHAP + Guarded LLM Delivery</div>
+            <!-- Chapter 6 Demo Slide: 3-Tier Database Matching -->
+            <div class="demo-slide" data-chapter="6">
+              <div class="slide-badge"><i class="fa-solid fa-database"></i> Chapter 06: Database Product Matching</div>
               <div class="slide-visual-flex">
-                <div class="receipt-frame-mock insight-mock">
-                  <div class="mock-insight-bubble">
-                    <div class="ib-header"><i class="fa-solid fa-shield-halved text-red"></i> AI Advisor</div>
-                    <p>"Overspent weekly grocery budget by ₹340. 74% attributed to brand-name ice cream. Switching to store-brand recovers ₹210."</p>
+                <div class="receipt-frame-mock matching-mock">
+                  <div class="match-pair-row">
+                    <div class="raw-ocr-text">RAW: "AML TAZA MLK 1L"</div>
+                    <div class="canonical-text">
+                      <span>Amul Taaza Milk (1000ml)</span>
+                      <span class="match-badge">Tier 1: 0.88</span>
+                    </div>
+                  </div>
+                  <div class="match-pair-row">
+                    <div class="raw-ocr-text">RAW: "CHKN BRST 500G"</div>
+                    <div class="canonical-text">
+                      <span>Fresh Chicken Breast</span>
+                      <span class="match-badge">Tier 2: Token</span>
+                    </div>
+                  </div>
+                  <div class="match-pair-row">
+                    <div class="raw-ocr-text">RAW: "DELUX ORG GREEK YGRT"</div>
+                    <div class="canonical-text">
+                      <span>High-Protein Greek Yogurt</span>
+                      <span class="match-badge">Tier 3: 0.91</span>
+                    </div>
                   </div>
                 </div>
                 <div class="demo-slide-info">
-                  <h4>Deterministic Guardrails &amp; Natural Language</h4>
+                  <h4>3-Tier Canonical Food Ontology Matching</h4>
                   <p>
-                    All mathematical totals, protein counts, and SHAP features are calculated deterministically in Python. 
-                    The LLM is only tasked with phrasing the explanation, completely preventing mathematical hallucinations.
+                    Raw receipt strings are matched against structured grocery &amp; food databases through 3 cascading tiers: 
+                    Tier 1 PostgreSQL trigram similarity (<code>pg_trgm</code> &gt; 0.65), Tier 2 token lexical matching, and 
+                    Tier 3 SentenceTransformers semantic vector embeddings. This attaches calories, NOVA tags, and brand metadata.
                   </p>
                   <div class="demo-stats-pills">
-                    <span class="p-pill"><i class="fa-solid fa-shield"></i> Zero Hallucination Risk</span>
-                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> Gemini / Groq Llama 3</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> pg_trgm Trigram &gt; 0.65</span>
+                    <span class="p-pill"><i class="fa-solid fa-layer-group"></i> Lexical Token Match</span>
+                    <span class="p-pill"><i class="fa-solid fa-brain"></i> Vector Embeddings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 7 Demo Slide: Multi-Mode Analysis -->
+            <div class="demo-slide" data-chapter="7">
+              <div class="slide-badge"><i class="fa-solid fa-chart-pie"></i> Chapter 07: Multi-Mode Analysis</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock analytics-mock">
+                  <div class="analytics-row-card card-money">
+                    <div>
+                      <strong style="color:#ff6b6b;"><i class="fa-solid fa-piggy-bank"></i> Save Money</strong>
+                      <p style="color:#ddd; margin: 0; font-size: 0.65rem;">Spent: ₹1,820 (Baseline: ₹1,200)</p>
+                    </div>
+                    <span style="font-weight:700; color:#ff6b6b; font-size:0.75rem;">+₹620 Spike</span>
+                  </div>
+                  <div class="analytics-row-card card-health">
+                    <div>
+                      <strong style="color:var(--secondary);"><i class="fa-solid fa-heart-pulse"></i> Eat Healthy</strong>
+                      <p style="color:#ddd; margin: 0; font-size: 0.65rem;">52% Unprocessed Whole Foods</p>
+                    </div>
+                    <span style="font-weight:700; color:var(--secondary); font-size:0.75rem;">82 / 100</span>
+                  </div>
+                  <div class="analytics-row-card card-muscle">
+                    <div>
+                      <strong style="color:var(--accent);"><i class="fa-solid fa-dumbbell"></i> Gain Muscle</strong>
+                      <p style="color:#ddd; margin: 0; font-size: 0.65rem;">Total Protein: 179.5g</p>
+                    </div>
+                    <span style="font-weight:700; color:var(--accent); font-size:0.75rem;">₹1.82 / g</span>
+                  </div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Concurrently Computed Tri-Vector Intelligence</h4>
+                  <p>
+                    The verified cart immediately triggers three behavioral intelligence engines simultaneously:
+                    <strong>Save Money</strong> tracks EWMA baseline drift with Isolation Forest; 
+                    <strong>Eat Healthy</strong> measures UN FAO NOVA ultra-processed ratios; and 
+                    <strong>Gain Muscle</strong> calculates protein density and bioavailability cost efficiency.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-chart-line"></i> EWMA Drift Tracking</span>
+                    <span class="p-pill"><i class="fa-solid fa-seedling"></i> UN FAO NOVA Index</span>
+                    <span class="p-pill"><i class="fa-solid fa-dumbbell"></i> Protein Cost-Efficiency</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 8 Demo Slide: Guarded LLM Insights -->
+            <div class="demo-slide" data-chapter="8">
+              <div class="slide-badge"><i class="fa-solid fa-shield-halved"></i> Chapter 08: Guarded LLM Insights</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock insight-mock">
+                  <div class="mock-insight-bubble">
+                    <div class="ib-header"><i class="fa-solid fa-shield-halved text-red"></i> Guarded LLM Advisor</div>
+                    <p>
+                      "You spent ₹1,820 (₹620 above EWMA baseline). SHAP shows 69% of variance came from luxury impulse snacks. 
+                      Your haul achieved 179.5g protein at high efficiency (₹1.82/g). Swapping to store-brand yogurt recovers ₹95 next trip."
+                    </p>
+                  </div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Deterministic Guardrails &amp; Conversational Delivery</h4>
+                  <p>
+                    All totals, SHAP attributions, and protein macros are computed deterministically in Python. 
+                    The LLM (Gemini 1.5 Flash / Groq Llama 3) only receives pre-computed numbers inside a locked Jinja2 prompt, 
+                    delivering conversational behavioral insights with <strong>0% mathematical hallucination</strong>.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-shield"></i> Zero Math In LLM</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> Streamed Synthesis</span>
+                    <span class="p-pill"><i class="fa-solid fa-circle-check"></i> Actionable Swaps</span>
                   </div>
                 </div>
               </div>
@@ -1190,13 +1381,16 @@ def preprocess_receipt(image_bytes):
 
           <!-- Video Controls Toolbar -->
           <div class="demo-controls-bar">
+            <button class="ctrl-btn" id="demoPrevBtn" aria-label="Previous Chapter">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
             <button class="ctrl-btn" id="demoPlayBtn" aria-label="Play/Pause Demonstration">
               <i class="fa-solid fa-pause"></i>
             </button>
             <div class="demo-timeline-track">
               <div class="demo-timeline-progress" id="demoTimelineProgress"></div>
             </div>
-            <span class="demo-time-display" id="demoTimeText">01 / 04</span>
+            <span class="demo-time-display" id="demoTimeText">01 / 08</span>
             <button class="ctrl-btn" id="demoNextBtn" aria-label="Next Chapter">
               <i class="fa-solid fa-forward-step"></i>
             </button>
@@ -1204,34 +1398,62 @@ def preprocess_receipt(image_bytes):
 
         </div>
 
-        <!-- Chapter Selector Navigation -->
+        <!-- 8-Chapter User Journey Navigation Grid -->
         <div class="demo-chapters-nav">
           <button class="chapter-btn active" data-target-chapter="1">
             <span class="ch-num">01</span>
             <div>
-              <strong>Camera Scan &amp; Dewarping</strong>
-              <span>OpenCV + CLAHE + 4-Point Homography</span>
+              <strong>Login &amp; Register</strong>
+              <span>Auth &amp; Profile Sync</span>
             </div>
           </button>
           <button class="chapter-btn" data-target-chapter="2">
             <span class="ch-num">02</span>
             <div>
-              <strong>LayoutLMv3 Extraction</strong>
-              <span>Multimodal Token Classification</span>
+              <strong>Onboarding &amp; Goals</strong>
+              <span>Preferences &amp; Baseline</span>
             </div>
           </button>
           <button class="chapter-btn" data-target-chapter="3">
             <span class="ch-num">03</span>
             <div>
-              <strong>Human Verification Table</strong>
-              <span>Editable React Native Interface</span>
+              <strong>Camera Scan &amp; Upload</strong>
+              <span>OpenCV + CLAHE Warp</span>
             </div>
           </button>
           <button class="chapter-btn" data-target-chapter="4">
             <span class="ch-num">04</span>
             <div>
-              <strong>SHAP &amp; Guarded LLM</strong>
-              <span>Explainable AI Insights Delivery</span>
+              <strong>LayoutLMv3 Extraction</strong>
+              <span>Spatial Token Parser</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="5">
+            <span class="ch-num">05</span>
+            <div>
+              <strong>Human Verification Table</strong>
+              <span>1-Tap Editable UI</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="6">
+            <span class="ch-num">06</span>
+            <div>
+              <strong>Product Matching</strong>
+              <span>3-Tier pg_trgm + Semantic</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="7">
+            <span class="ch-num">07</span>
+            <div>
+              <strong>Multi-Mode Analytics</strong>
+              <span>Money, Health &amp; Muscle</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="8">
+            <span class="ch-num">08</span>
+            <div>
+              <strong>Guarded LLM Insights</strong>
+              <span>Deterministic XAI Guidance</span>
             </div>
           </button>
         </div>
