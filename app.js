@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSvgMotionPaths();
   init3DPhoneTilt();
   initPipelineArchitecture();
-  initTriModeEngine();
   initDemoShowcasePlayer();
   initApiDocumentation();
   initMobileNav();
@@ -651,38 +650,7 @@ function initPipelineArchitecture() {
 }
 
 /* ==========================================================================
-   4. TRI-MODE LIFESTYLE ENGINE
-   ========================================================================== */
-function initTriModeEngine() {
-  const tabs = document.querySelectorAll('.tri-tab-btn');
-  const panels = document.querySelectorAll('.tri-mode-panel');
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach((t) => t.classList.remove('active'));
-      panels.forEach((p) => p.classList.remove('active-panel'));
-
-      tab.classList.add('active');
-      const mode = tab.getAttribute('data-mode');
-      const targetPanel = document.getElementById(`panel-${mode}`);
-      if (targetPanel) targetPanel.classList.add('active-panel');
-    });
-  });
-
-  // Dynamic Budget Slider (Save Money Mode)
-  const budgetRange = document.getElementById('budgetRange');
-  const budgetValue = document.getElementById('budgetValue');
-
-  if (budgetRange && budgetValue) {
-    budgetRange.addEventListener('input', (e) => {
-      const val = parseInt(e.target.value, 10);
-      budgetValue.textContent = `₹${val.toLocaleString()}`;
-    });
-  }
-}
-
-/* ==========================================================================
-   5. INTERACTIVE VIDEO / DEMO PLAYER
+   4. INTERACTIVE VIDEO / DEMO PLAYER
    ========================================================================== */
 function initDemoShowcasePlayer() {
   const slides = document.querySelectorAll('.demo-slide');

@@ -63,7 +63,6 @@
         <a href="#problem" class="nav-link">Problem</a>
         <a href="#objectives" class="nav-link">Objectives</a>
         <a href="#pipeline" class="nav-link">9-Stage Pipeline</a>
-        <a href="#tri-mode" class="nav-link">Tri-Mode Engine</a>
         <a href="#demo" class="nav-link">App Showcase</a>
         <a href="#api-docs" class="nav-link">Architecture</a>
         <a href="#team" class="nav-link">Team 74</a>
@@ -87,15 +86,14 @@
     <!-- Mobile Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
       <nav class="mobile-nav-links">
-        <a href="#problem" class="mobile-link">The Dilemma</a>
+        <a href="#project-overview" class="mobile-link">Capstone Overview</a>
+        <a href="#problem" class="mobile-link">The Problem</a>
         <a href="#objectives" class="mobile-link">Engineering Goals</a>
         <a href="#pipeline" class="mobile-link">9-Stage Architecture</a>
-        <a href="#tri-mode" class="mobile-link">Tri-Mode Intelligence</a>
         <a href="#demo" class="mobile-link">Interactive Demo</a>
-        <a href="#store-preview" class="mobile-link">Play Store Experience</a>
         <a href="#api-docs" class="mobile-link">API Explorer</a>
         <a href="#roadmap" class="mobile-link">Milestone Roadmap</a>
-        <a href="#team" class="mobile-link">Research Team</a>
+        <a href="#team" class="mobile-link">Team 74</a>
       </nav>
       <div class="mobile-drawer-cta">
         <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" class="btn btn-primary btn-block">
@@ -136,9 +134,9 @@
             <i class="fa-solid fa-diagram-project"></i>
             <span>Inspect 9-Stage Pipeline</span>
           </a>
-          <a href="#tri-mode" class="btn btn-glass btn-lg">
-            <i class="fa-solid fa-sliders"></i>
-            <span>Explore Tri-Mode Simulator</span>
+          <a href="#demo" class="btn btn-glass btn-lg">
+            <i class="fa-solid fa-play"></i>
+            <span>Watch Live Demo</span>
           </a>
         </div>
 
@@ -1055,380 +1053,7 @@ def preprocess_receipt(image_bytes):
     </div>
   </section>
 
-  <!-- Section 5: Tri-Mode Feature Showcase -->
-  <section class="trimode-section" id="tri-mode">
-    <div class="container">
-      <div class="section-heading-center">
-        <span class="section-subtitle">Triple Lifestyle Intelligence</span>
-        <h2 class="section-title">The Tri-Mode Analytical Engine</h2>
-        <p class="section-desc">
-          One receipt scan concurrently fuels three distinct engines. Toggle below to test the interactive simulation:
-        </p>
-      </div>
-
-      <!-- Mode Selector Tabs -->
-      <div class="tri-mode-tabs-nav">
-        <button class="tri-tab-btn active" data-mode="money">
-          <div class="tab-btn-icon red-icon"><i class="fa-solid fa-piggy-bank"></i></div>
-          <div class="tab-btn-text">
-            <strong>Save Money</strong>
-            <span>EWMA Baseline &amp; SHAP Anomaly</span>
-          </div>
-        </button>
-
-        <button class="tri-tab-btn" data-mode="health">
-          <div class="tab-btn-icon blue-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-          <div class="tab-btn-text">
-            <strong>Eat Healthy</strong>
-            <span>NOVA Index &amp; Micronutrients</span>
-          </div>
-        </button>
-
-        <button class="tri-tab-btn" data-mode="muscle">
-          <div class="tab-btn-icon yellow-icon"><i class="fa-solid fa-dumbbell"></i></div>
-          <div class="tab-btn-text">
-            <strong>Gain Muscle</strong>
-            <span>Protein Density &amp; Amino Profile</span>
-          </div>
-        </button>
-      </div>
-
-      <!-- Mode Content Card 1: Save Money -->
-      <div class="tri-mode-panel active-panel" id="panel-money">
-        <div class="panel-layout-grid">
-          
-          <div class="panel-left-content">
-            <div class="mode-badge-pill red-pill">Financial Behavioral Intelligence</div>
-            <h3 class="panel-heading">Explainable Overspending &amp; Smart Swaps</h3>
-            <p class="panel-description">
-              Pantrix builds a personalized <strong>Exponentially Weighted Moving Average (EWMA)</strong> of your grocery spending. 
-              When a cart breaches tolerance, an <strong>Isolation Forest</strong> flags the deviation, and <strong>SHAP TreeExplainer</strong> 
-              attributes exact rupees of variance to specific items.
-            </p>
-
-            <div class="interactive-control-box">
-              <label class="control-label">Test Budget Slider (Monthly Target): <span id="budgetValue">₹6,000</span></label>
-              <input type="range" class="custom-slider" id="budgetRange" min="3000" max="12000" step="500" value="6000">
-            </div>
-
-            <!-- Smart Brand Swap Recommendation -->
-            <div class="smart-swap-card">
-              <div class="swap-header">
-                <i class="fa-solid fa-arrow-right-arrow-left text-red"></i>
-                <span>Actionable Brand Swap Identified</span>
-              </div>
-              <div class="swap-body">
-                <div class="swap-item from">
-                  <span class="s-label">Purchased Item:</span>
-                  <strong>Deluxe Brand Greek Yogurt (₹180)</strong>
-                </div>
-                <div class="swap-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                <div class="swap-item to">
-                  <span class="s-label">Store Alternative:</span>
-                  <strong>Amul High-Protein Dahi (₹85)</strong>
-                </div>
-              </div>
-              <div class="swap-footer">
-                <span class="savings-tag">Recover ₹95 without losing protein content</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-right-viz">
-            <!-- SHAP Waterfall Chart Simulation -->
-            <div class="viz-card">
-              <div class="viz-card-header">
-                <span><i class="fa-solid fa-chart-column text-red"></i> SHAP Feature Attribution (Variance Breakdown)</span>
-                <span class="badge-mini">Model: TreeExplainer</span>
-              </div>
-              <p class="viz-sub">Baseline Cart: ₹1,200 &bull; Actual Cart: ₹1,820 (+₹620 Anomaly)</p>
-
-              <div class="shap-bars-container">
-                
-                <div class="shap-bar-row">
-                  <div class="shap-item-label">
-                    <span>Deluxe Ice Cream (500ml)</span>
-                    <strong class="text-red">+₹240.00 (SHAP +0.48)</strong>
-                  </div>
-                  <div class="shap-track">
-                    <div class="shap-bar-fill red-fill" style="width: 78%;"></div>
-                  </div>
-                </div>
-
-                <div class="shap-bar-row">
-                  <div class="shap-item-label">
-                    <span>Branded Frozen Pizzas (x2)</span>
-                    <strong class="text-red">+₹190.00 (SHAP +0.31)</strong>
-                  </div>
-                  <div class="shap-track">
-                    <div class="shap-bar-fill red-fill" style="width: 62%;"></div>
-                  </div>
-                </div>
-
-                <div class="shap-bar-row">
-                  <div class="shap-item-label">
-                    <span>Imported Olive Oil (1L)</span>
-                    <strong class="text-red">+₹220.00 (SHAP +0.28)</strong>
-                  </div>
-                  <div class="shap-track">
-                    <div class="shap-bar-fill red-fill" style="width: 55%;"></div>
-                  </div>
-                </div>
-
-                <div class="shap-bar-row">
-                  <div class="shap-item-label">
-                    <span>Staples (Lentils &amp; Rice)</span>
-                    <strong class="text-blue">-₹30.00 (SHAP -0.07)</strong>
-                  </div>
-                  <div class="shap-track">
-                    <div class="shap-bar-fill blue-fill" style="width: 15%;"></div>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Guarded LLM Output Block -->
-              <div class="guarded-llm-box">
-                <div class="g-header">
-                  <i class="fa-solid fa-shield-halved text-red"></i> Guarded LLM Natural Language Output
-                </div>
-                <p>
-                  "You overspent your grocery baseline by ₹620 this run. SHAP attribution shows 69% of this anomaly 
-                  arose from impulse luxury items (Ice Cream &amp; Frozen Pizzas). Swapping to store brands recovers ₹430 next trip."
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Mode Content Card 2: Eat Healthy -->
-      <div class="tri-mode-panel" id="panel-health">
-        <div class="panel-layout-grid">
-          
-          <div class="panel-left-content">
-            <div class="mode-badge-pill blue-pill">Nutritional Quality Intelligence</div>
-            <h3 class="panel-heading">NOVA Classification &amp; Micronutrient Density</h3>
-            <p class="panel-description">
-              Pantrix maps every item to food ontology databases to compute your cart's 
-              <strong>NOVA Food Processing Score</strong> (from unprocessed whole foods to ultra-processed industrial formulations) 
-              and tracks micronutrient diversity.
-            </p>
-
-            <div class="health-kpi-row">
-              <div class="h-kpi-card">
-                <span class="h-title">Cart Health Score</span>
-                <span class="h-value text-blue">82 / 100</span>
-                <span class="h-status text-blue"><i class="fa-solid fa-check"></i> High Whole Foods</span>
-              </div>
-              <div class="h-kpi-card">
-                <span class="h-title">Ultra-Processed Ratio</span>
-                <span class="h-value text-red">18.4%</span>
-                <span class="h-status text-red"><i class="fa-solid fa-arrow-down"></i> -6% vs Last Week</span>
-              </div>
-            </div>
-
-            <!-- Nutrient Warnings List -->
-            <div class="nutrient-alerts-card">
-              <div class="alert-item">
-                <i class="fa-solid fa-triangle-exclamation text-yellow"></i>
-                <div>
-                  <strong>Sodium Concentration Alert</strong>
-                  <p>Canned soup and ramen pack 1,420mg sodium (62% of daily upper recommendation).</p>
-                </div>
-              </div>
-              <div class="alert-item">
-                <i class="fa-solid fa-circle-check text-blue"></i>
-                <div>
-                  <strong>Fiber Target Exceeded</strong>
-                  <p>Lentils and oats provide 38g of soluble and insoluble dietary fiber.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-right-viz">
-            <div class="viz-card">
-              <div class="viz-card-header">
-                <span><i class="fa-solid fa-chart-pie text-blue"></i> NOVA Food Processing Distribution</span>
-                <span class="badge-mini">UN FAO Standard</span>
-              </div>
-
-              <!-- NOVA Ratio Visual Bar -->
-              <div class="nova-stacked-bar">
-                <div class="nova-segment nova-1" style="width: 52%;" title="Group 1: Unprocessed / Minimally Processed (52%)">52%</div>
-                <div class="nova-segment nova-2" style="width: 16%;" title="Group 2: Processed Culinary Ingredients (16%)">16%</div>
-                <div class="nova-segment nova-3" style="width: 14%;" title="Group 3: Processed Foods (14%)">14%</div>
-                <div class="nova-segment nova-4" style="width: 18%;" title="Group 4: Ultra-Processed Foods (18%)">18%</div>
-              </div>
-
-              <div class="nova-legend">
-                <span class="l-item"><span class="dot-color dot-n1"></span> Grp 1: Whole Foods (52%)</span>
-                <span class="l-item"><span class="dot-color dot-n2"></span> Grp 2: Culinary (16%)</span>
-                <span class="l-item"><span class="dot-color dot-n3"></span> Grp 3: Processed (14%)</span>
-                <span class="l-item"><span class="dot-color dot-n4"></span> Grp 4: Ultra-Processed (18%)</span>
-              </div>
-
-              <!-- Micronutrient Radar / Progress Bars -->
-              <div class="micro-bars-wrap">
-                <div class="micro-row">
-                  <div class="m-info"><span>Vitamin A &amp; Carotenoids</span><strong>84%</strong></div>
-                  <div class="m-track"><div class="m-fill blue-fill" style="width: 84%;"></div></div>
-                </div>
-                <div class="micro-row">
-                  <div class="m-info"><span>Iron &amp; Magnesium</span><strong>92%</strong></div>
-                  <div class="m-track"><div class="m-fill blue-fill" style="width: 92%;"></div></div>
-                </div>
-                <div class="micro-row">
-                  <div class="m-info"><span>Calcium</span><strong>65%</strong></div>
-                  <div class="m-track"><div class="m-fill yellow-fill" style="width: 65%;"></div></div>
-                </div>
-              </div>
-
-              <div class="guarded-llm-box">
-                <div class="g-header">
-                  <i class="fa-solid fa-shield-halved text-blue"></i> Guarded LLM Health Advisory
-                </div>
-                <p>
-                  "Your cart is 52% unprocessed fresh produce. To improve your Calcium score from 65% to 90%, 
-                  consider adding fortified milk or tofu on your next grocery run."
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Mode Content Card 3: Gain Muscle -->
-      <div class="tri-mode-panel" id="panel-muscle">
-        <div class="panel-layout-grid">
-          
-          <div class="panel-left-content">
-            <div class="mode-badge-pill yellow-pill">Hypertrophy &amp; Athletic Fuel</div>
-            <h3 class="panel-heading">Grams Protein Per Rupee &amp; Macro Split</h3>
-            <p class="panel-description">
-              Stop typing every single food row into manual macro trackers. 
-              Pantrix analyzes your entire grocery receipt to determine your <strong>Total Usable Protein</strong>, 
-              <strong>Essential Amino Acid (EAA)</strong> balance, and <strong>Cost Efficiency per Gram of Protein</strong>.
-            </p>
-
-            <div class="muscle-kpi-row">
-              <div class="m-kpi-card">
-                <span class="m-title">Total Cart Protein</span>
-                <span class="m-value text-yellow">179.5g</span>
-                <span class="m-status text-yellow">89.8% of 200g Daily Goal</span>
-              </div>
-              <div class="m-kpi-card">
-                <span class="m-title">Protein Efficiency</span>
-                <span class="m-value text-yellow">₹1.82 / gram</span>
-                <span class="m-status text-yellow">Top 10% Cost-Efficient Cart</span>
-              </div>
-            </div>
-
-            <!-- EAA Profile Indicator -->
-            <div class="eaa-card">
-              <div class="eaa-title">
-                <i class="fa-solid fa-dna text-yellow"></i>
-                <span>Complete Protein Breakdown (Essential Amino Acids)</span>
-              </div>
-              <div class="eaa-tags">
-                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Leucine: 14.2g (Optimal)</span>
-                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Isoleucine: 9.8g</span>
-                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Valine: 10.4g</span>
-                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Complete BCAA Profile</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-right-viz">
-            <div class="viz-card">
-              <div class="viz-card-header">
-                <span><i class="fa-solid fa-dumbbell text-yellow"></i> Top Protein Contributors in Scanned Cart</span>
-                <span class="badge-mini">Bioavailability Ranked</span>
-              </div>
-
-              <!-- Protein Ranking Table -->
-              <div class="protein-ranking-list">
-                
-                <div class="p-rank-item">
-                  <div class="p-rank-meta">
-                    <span class="p-badge">1</span>
-                    <div>
-                      <strong>Chicken Breast (500g)</strong>
-                      <span class="p-sub">₹310 &bull; 105g Total Protein</span>
-                    </div>
-                  </div>
-                  <div class="p-rank-stat">
-                    <span class="eff-score">0.34g / ₹1</span>
-                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 100%;"></div></div>
-                  </div>
-                </div>
-
-                <div class="p-rank-item">
-                  <div class="p-rank-meta">
-                    <span class="p-badge">2</span>
-                    <div>
-                      <strong>Farm Fresh Eggs (Pack of 6)</strong>
-                      <span class="p-sub">₹75 &bull; 36g Total Protein</span>
-                    </div>
-                  </div>
-                  <div class="p-rank-stat">
-                    <span class="eff-score">0.48g / ₹1</span>
-                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 85%;"></div></div>
-                  </div>
-                </div>
-
-                <div class="p-rank-item">
-                  <div class="p-rank-meta">
-                    <span class="p-badge">3</span>
-                    <div>
-                      <strong>Amul Cow Milk (1L)</strong>
-                      <span class="p-sub">₹62 &bull; 32g Total Protein</span>
-                    </div>
-                  </div>
-                  <div class="p-rank-stat">
-                    <span class="eff-score">0.51g / ₹1</span>
-                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 72%;"></div></div>
-                  </div>
-                </div>
-
-                <div class="p-rank-item">
-                  <div class="p-rank-meta">
-                    <span class="p-badge">4</span>
-                    <div>
-                      <strong>Rolled Oats (500g)</strong>
-                      <span class="p-sub">₹95 &bull; 16g Total Protein</span>
-                    </div>
-                  </div>
-                  <div class="p-rank-stat">
-                    <span class="eff-score">0.17g / ₹1</span>
-                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 40%;"></div></div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="guarded-llm-box">
-                <div class="g-header">
-                  <i class="fa-solid fa-shield-halved text-yellow"></i> Guarded LLM Muscle Advice
-                </div>
-                <p>
-                  "This grocery haul hits 179.5g protein with 3 high-bioavailability sources (Chicken, Eggs, Milk). 
-                  To hit your 200g target, add 100g of paneer or 2 tablespoons of peanut butter."
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Section 6: Demonstration & Video Player Showcase -->
+  <!-- Section 5: Demonstration & Video Player Showcase -->
   <section class="demo-section" id="demo">
     <div class="container">
       <div class="section-heading-center">
@@ -1894,7 +1519,7 @@ def preprocess_receipt(image_bytes):
             <li><a href="#problem">The Problem</a></li>
             <li><a href="#objectives">Project Objectives</a></li>
             <li><a href="#pipeline">9-Stage Pipeline</a></li>
-            <li><a href="#tri-mode">Tri-Mode Showcase</a></li>
+            <li><a href="#demo">Live Demo Showcase</a></li>
           </ul>
         </div>
 
