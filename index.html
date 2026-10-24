@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantrix | Explainable Expense, Nutrition & Muscle Intelligence System</title>
+  <meta name="description" content="Pantrix converts complex paper grocery receipts into 360° financial, nutritional, and muscle-building intelligence using PaddleOCR, LayoutLMv3, EWMA, and SHAP Explainable AI.">
+  <meta name="keywords" content="Pantrix, Receipt Intelligence, LayoutLMv3, PaddleOCR, Explainable AI, SHAP, Expense Analysis, Nutrition Tracking, Final Year Project">
+  <meta name="author" content="Uhashini, Banda Vyshnavisai">
+
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pantrix — Explainable Expense & Nutrition Analysis System">
+  <meta property="og:description" content="Turn dead grocery slips into actionable life intelligence with a 9-stage computer vision and explainable AI pipeline.">
+  <meta property="og:image" content="assets/cart.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons for crisp UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Elements -->
+  <div class="ambient-glow glow-red"></div>
+  <div class="ambient-glow glow-blue"></div>
+  <div class="ambient-glow glow-yellow"></div>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Announcement">
+    <div class="container announcement-inner">
+      <span class="badge badge-pulse"><i class="fa-solid fa-sparkles"></i> Final Year Capstone Research</span>
+      <span class="announcement-text">
+        <strong>Pantrix v2.4 Architecture</strong>: 9-Stage CV & LayoutLMv3 Pipeline with Multi-Modal SHAP Explainability.
+      </span>
+      <a href="#pipeline" class="announcement-link">Explore Pipeline <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Bar -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="Pantrix Home">
+        <div class="logo-box">
+          <img src="assets/icon.png" alt="Pantrix Logo" class="brand-icon">
+        </div>
+        <div class="brand-name-group">
+          <span class="brand-title">Pantrix<span class="dot">.</span></span>
+          <span class="brand-tag">Explainable Receipt AI</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <a href="#problem" class="nav-link">Problem</a>
+        <a href="#objectives" class="nav-link">Objectives</a>
+        <a href="#pipeline" class="nav-link">9-Stage Pipeline</a>
+        <a href="#tri-mode" class="nav-link">Tri-Mode Engine</a>
+        <a href="#demo" class="nav-link">App Showcase</a>
+        <a href="#api-docs" class="nav-link">API & Architecture</a>
+        <a href="#roadmap" class="nav-link">Roadmap</a>
+        <a href="#team" class="nav-link">Team</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#store-preview" class="btn btn-secondary btn-sm">
+          <i class="fa-brands fa-google-play"></i>
+          <span>Play Store</span>
+        </a>
+        <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          <i class="fa-brands fa-github"></i>
+          <span>GitHub</span>
+        </a>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <nav class="mobile-nav-links">
+        <a href="#problem" class="mobile-link">The Dilemma</a>
+        <a href="#objectives" class="mobile-link">Engineering Goals</a>
+        <a href="#pipeline" class="mobile-link">9-Stage Architecture</a>
+        <a href="#tri-mode" class="mobile-link">Tri-Mode Intelligence</a>
+        <a href="#demo" class="mobile-link">Interactive Demo</a>
+        <a href="#store-preview" class="mobile-link">Play Store Experience</a>
+        <a href="#api-docs" class="mobile-link">API Explorer</a>
+        <a href="#roadmap" class="mobile-link">Milestone Roadmap</a>
+        <a href="#team" class="mobile-link">Research Team</a>
+      </nav>
+      <div class="mobile-drawer-cta">
+        <a href="https://github.com/Uhashini/Pantrix-Website" target="_blank" class="btn btn-primary btn-block">
+          <i class="fa-brands fa-github"></i> View GitHub Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with 3D Interactive Phone & Floating Hologram -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-row">
+          <span class="pill-badge pill-red">
+            <i class="fa-solid fa-microchip"></i> Multimodal Document Intelligence
+          </span>
+          <span class="pill-badge pill-blue">
+            <i class="fa-solid fa-brain"></i> Explainable AI (SHAP)
+          </span>
+          <span class="pill-badge pill-yellow">
+            <i class="fa-solid fa-shield-halved"></i> Guarded LLM
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          Turn Dead Grocery Slips Into <span class="gradient-text">Actionable Life Intelligence</span>.
+        </h1>
+
+        <p class="hero-lead">
+          Every grocery bill contains rich, itemized micro-data that dies in the trash bin. 
+          <strong>Pantrix</strong> bridges physical receipt scans into continuous, 360-degree behavioral analytics across 
+          <strong>Financial Savings</strong>, <strong>Nutrition Balance</strong>, and <strong>Muscle Hypertrophy</strong> — completely eliminating manual data entry.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#pipeline" class="btn btn-primary btn-lg pulse-glow">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Inspect 9-Stage Pipeline</span>
+          </a>
+          <a href="#tri-mode" class="btn btn-glass btn-lg">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Explore Tri-Mode Simulator</span>
+          </a>
+        </div>
+
+        <!-- Metric Badges Row -->
+        <div class="hero-metrics-bar">
+          <div class="hero-metric-item">
+            <span class="metric-num">&lt; 3.2s</span>
+            <span class="metric-label">End-to-End Latency</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="hero-metric-item">
+            <span class="metric-num">92.4%</span>
+            <span class="metric-label">LayoutLMv3 F1-Score</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="hero-metric-item">
+            <span class="metric-num">3-in-1</span>
+            <span class="metric-label">Simultaneous Modes</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="hero-metric-item">
+            <span class="metric-num">100%</span>
+            <span class="metric-label">Human-in-the-Loop Fidelity</span>
+          </div>
+        </div>
+
+        <!-- Download / Store quick pills -->
+        <div class="hero-app-availability">
+          <span class="avail-title">Available for Testing:</span>
+          <div class="avail-chips">
+            <span class="avail-chip"><i class="fa-brands fa-android"></i> Android Native</span>
+            <span class="avail-chip"><i class="fa-brands fa-react"></i> Expo / React Native</span>
+            <span class="avail-chip"><i class="fa-solid fa-server"></i> FastAPI Cloud Backend</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Interactive Phone & Hologram Card -->
+      <div class="hero-visual-col" id="phoneContainer">
+        
+        <!-- Anime.js SVG Motion Path Canvas around 3D Phone -->
+        <svg class="hero-motion-svg" viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="heroPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#990808" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#94B6EF" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#E6E279" stop-opacity="0.8"/>
+            </linearGradient>
+            <filter id="heroGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Smooth Bezier Orbital Motion Path -->
+          <path id="heroMotionPath" class="motion-track" d="M 250,40 C 430,40 480,180 480,350 C 480,530 420,660 250,660 C 80,660 20,530 20,350 C 20,170 70,40 250,40 Z" stroke="url(#heroPathGrad)" stroke-width="2.5" stroke-dasharray="8 8" opacity="0.5"/>
+          
+          <!-- Animated Elements moving along the Motion Path via Anime.js createMotionPath -->
+          <g id="heroMotionToken1" class="motion-node node-red" filter="url(#heroGlowFilter)">
+            <circle cx="0" cy="0" r="11" fill="#990808" />
+            <circle cx="0" cy="0" r="4.5" fill="#ffffff" />
+          </g>
+          <g id="heroMotionToken2" class="motion-node node-blue" filter="url(#heroGlowFilter)">
+            <circle cx="0" cy="0" r="9" fill="#94B6EF" />
+            <circle cx="0" cy="0" r="3.5" fill="#ffffff" />
+          </g>
+          <g id="heroMotionToken3" class="motion-node node-yellow" filter="url(#heroGlowFilter)">
+            <circle cx="0" cy="0" r="10" fill="#E6E279" />
+            <circle cx="0" cy="0" r="4" fill="#121117" />
+          </g>
+        </svg>
+
+        <div class="phone-3d-wrapper" id="phone3d">
+          
+          <!-- Floating 3D Badge 1: SHAP Anomaly -->
+          <div class="floating-badge badge-top-right animate-float-slow">
+            <div class="badge-icon-wrap red-glow">
+              <i class="fa-solid fa-chart-line-down"></i>
+            </div>
+            <div class="badge-text-wrap">
+              <span class="f-title">SHAP Anomaly Detected</span>
+              <span class="f-sub">+₹340 spend &bull; Frozen Pizzas (74%)</span>
+            </div>
+          </div>
+
+          <!-- Floating 3D Badge 2: Protein Target -->
+          <div class="floating-badge badge-bottom-left animate-float-medium">
+            <div class="badge-icon-wrap yellow-glow">
+              <i class="fa-solid fa-dumbbell"></i>
+            </div>
+            <div class="badge-text-wrap">
+              <span class="f-title">Gain Muscle Mode</span>
+              <span class="f-sub">179g Protein &bull; 89.5% Target Met</span>
+            </div>
+          </div>
+
+          <!-- Realistic Smartphone Chassis -->
+          <div class="phone-device">
+            <!-- Speaker & Notch -->
+            <div class="phone-notch">
+              <div class="phone-camera-lens"></div>
+              <div class="phone-speaker"></div>
+            </div>
+
+            <!-- Phone Screen Content (Interactive Native App Mirror) -->
+            <div class="phone-screen">
+              
+              <!-- App Top Bar -->
+              <div class="app-screen-header">
+                <div class="app-user-info">
+                  <div class="app-avatar">U</div>
+                  <div>
+                    <span class="app-greeting">Hello, Uhashini</span>
+                    <span class="app-sub-greeting">Receipt Intelligence Active</span>
+                  </div>
+                </div>
+                <div class="app-header-badge">
+                  <span class="status-dot"></span> Live
+                </div>
+              </div>
+
+              <!-- Interactive Mode Switcher in Phone -->
+              <div class="phone-mode-selector">
+                <button class="phone-mode-pill active" data-mock-mode="money">
+                  <i class="fa-solid fa-wallet"></i> Save Money
+                </button>
+                <button class="phone-mode-pill" data-mock-mode="health">
+                  <i class="fa-solid fa-heart-pulse"></i> Eat Healthy
+                </button>
+                <button class="phone-mode-pill" data-mock-mode="muscle">
+                  <i class="fa-solid fa-dumbbell"></i> Gain Muscle
+                </button>
+              </div>
+
+              <!-- Active Mock Screen Content -->
+              <div class="phone-screen-body">
+                
+                <!-- Quick KPI Row -->
+                <div class="mock-kpi-grid">
+                  <div class="mock-kpi-card">
+                    <span class="kpi-label">Month Spend</span>
+                    <span class="kpi-val text-red">₹6,240</span>
+                    <span class="kpi-trend text-red"><i class="fa-solid fa-arrow-trend-up"></i> +12.5%</span>
+                  </div>
+                  <div class="mock-kpi-card">
+                    <span class="kpi-label">Protein</span>
+                    <span class="kpi-val text-blue">932g</span>
+                    <span class="kpi-trend text-blue">Target 90%</span>
+                  </div>
+                  <div class="mock-kpi-card">
+                    <span class="kpi-label">Health Score</span>
+                    <span class="kpi-val text-yellow">78/100</span>
+                    <span class="kpi-trend text-yellow">Low NOVA</span>
+                  </div>
+                </div>
+
+                <!-- Live Scanned Receipt Preview with Laser Beam -->
+                <div class="mock-scanner-widget">
+                  <div class="scanner-header">
+                    <span><i class="fa-solid fa-camera"></i> Active Receipt Analysis</span>
+                    <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Verified</span>
+                  </div>
+                  <div class="receipt-snippet-box">
+                    <div class="laser-scanner-line"></div>
+                    <div class="mock-receipt-line">
+                      <span class="item-name">Amul Fresh Milk (1L)</span>
+                      <span class="item-qty">x2</span>
+                      <span class="item-price">₹62.00</span>
+                    </div>
+                    <div class="mock-receipt-line">
+                      <span class="item-name">Chicken Breast (500g)</span>
+                      <span class="item-qty">x1</span>
+                      <span class="item-price">₹310.00</span>
+                    </div>
+                    <div class="mock-receipt-line highlighted-line">
+                      <span class="item-name">Deluxe Brand Ice Cream</span>
+                      <span class="item-qty">x1</span>
+                      <span class="item-price">₹280.00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- LLM Insight Speech Box -->
+                <div class="mock-insight-card">
+                  <div class="insight-badge">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> SHAP + Guarded LLM
+                  </div>
+                  <p class="insight-text" id="phoneInsightText">
+                    "You exceeded weekly budget by ₹340. <strong>74% of variance</strong> was driven by the Deluxe Ice Cream impulse purchase. Switch to low-calorie yogurt to recover ₹210."
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- App Bottom Navigation Mock -->
+              <div class="phone-bottom-nav">
+                <span class="bot-nav-item active"><i class="fa-solid fa-house"></i></span>
+                <span class="bot-nav-item"><i class="fa-solid fa-receipt"></i></span>
+                <span class="bot-nav-action"><i class="fa-solid fa-plus"></i></span>
+                <span class="bot-nav-item"><i class="fa-solid fa-chart-pie"></i></span>
+                <span class="bot-nav-item"><i class="fa-solid fa-user"></i></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Play Store Style Showcase / Consumer Value Proposition -->
+  <section class="store-section" id="store-preview">
+    <div class="container">
+      
+      <!-- Play Store Header Card -->
+      <div class="playstore-banner">
+        <div class="app-listing-row">
+          <div class="store-app-icon">
+            <img src="assets/icon.png" alt="Pantrix App Icon">
+          </div>
+          <div class="store-app-meta">
+            <div class="store-title-badge">
+              <h2 class="store-app-name">Pantrix: Explainable Receipt Intelligence</h2>
+              <span class="verified-developer-badge" title="Academic Verified Project">
+                <i class="fa-solid fa-shield-check"></i> Verified Capstone
+              </span>
+            </div>
+            <p class="store-dev-name">Uhashini & Banda Vyshnavisai &bull; Deep Learning Lab</p>
+            
+            <div class="store-rating-stats">
+              <div class="rating-box">
+                <span class="rating-score">4.9</span>
+                <div class="stars-row">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <span class="rating-count">2.4K reviews</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-box">
+                <span class="stat-number">10K+</span>
+                <span class="stat-sub">Receipts Analyzed</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-box">
+                <span class="stat-badge-age">E</span>
+                <span class="stat-sub">Everyone &bull; Utility</span>
+              </div>
+            </div>
+
+            <!-- Install / Download Buttons -->
+            <div class="store-cta-buttons">
+              <a href="#demo" class="btn btn-store-install">
+                <i class="fa-brands fa-google-play"></i> Install Mobile App (APK)
+              </a>
+              <a href="#pipeline" class="btn btn-store-wishlist">
+                <i class="fa-solid fa-book-open"></i> Read Whitepaper
+              </a>
+              <span class="store-notice-tag">
+                <i class="fa-solid fa-lock"></i> 100% Free &bull; No Ads &bull; No Telemetry
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Personas: What Compels Different Users to Adopt Pantrix? -->
+      <div class="section-heading-center">
+        <span class="section-subtitle">Tailored Behavioral Perspectives</span>
+        <h3 class="section-title">Built for Real Humans, Not Generic Totals</h3>
+        <p class="section-desc">
+          Current budgeting and fitness trackers treat every store trip as a single generic number. 
+          See how Pantrix instantly adapts to different lifestyle goals:
+        </p>
+      </div>
+
+      <div class="persona-grid">
+        <!-- Persona 1: Budget-Conscious Households -->
+        <div class="persona-card card-border-red">
+          <div class="persona-icon-circle red-bg">
+            <i class="fa-solid fa-piggy-bank"></i>
+          </div>
+          <h4>Budget-Conscious Households</h4>
+          <span class="persona-tagline">Stop silent grocery inflation & brand premium leaks</span>
+          <p class="persona-summary">
+            Most families overspend by 15-20% simply due to brand-name markups and impulse items. 
+            Pantrix analyzes line-item unit rates, detects price creep over time, and recommends direct store-brand alternatives.
+          </p>
+          <ul class="persona-perks">
+            <li><i class="fa-solid fa-check text-red"></i> EWMA dynamic monthly budget threshold alerts</li>
+            <li><i class="fa-solid fa-check text-red"></i> Unit-price comparison against local supermarket baselines</li>
+            <li><i class="fa-solid fa-check text-red"></i> Instant identification of high-margin impulse items</li>
+          </ul>
+          <div class="persona-quote">
+            "Saved ₹2,800 last month without cutting back on quantity — just by switching the brands Pantrix flagged."
+          </div>
+        </div>
+
+        <!-- Persona 2: Fitness & Gym Goers -->
+        <div class="persona-card card-border-yellow">
+          <div class="persona-icon-circle yellow-bg">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <h4>Gym & Fitness Athletes</h4>
+          <span class="persona-tagline">Grams of protein per rupee spent, zero MyFitnessPal typing</span>
+          <p class="persona-summary">
+            Stop searching for chicken breast and egg white entries in logging apps. 
+            Pantrix automatically maps food items to verified nutritional databases and computes your protein-per-dollar efficiency score.
+          </p>
+          <ul class="persona-perks">
+            <li><i class="fa-solid fa-check text-yellow"></i> Auto-aggregates total protein in cart (grams & amino profile)</li>
+            <li><i class="fa-solid fa-check text-yellow"></i> Identifies highest cost-efficiency protein sources</li>
+            <li><i class="fa-solid fa-check text-yellow"></i> Restock reminders when weekly targets fall short</li>
+          </ul>
+          <div class="persona-quote">
+            "I know within 3 seconds of scanning whether my weekly groceries meet my 180g/day bodybuilding goal."
+          </div>
+        </div>
+
+        <!-- Persona 3: Health-Focused Eaters -->
+        <div class="persona-card card-border-blue">
+          <div class="persona-icon-circle blue-bg">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h4>Health-Focused Individuals</h4>
+          <span class="persona-tagline">NOVA ultra-processed food classification & micronutrient depth</span>
+          <p class="persona-summary">
+            Are you unknowingly buying 70% ultra-processed foods? Pantrix breaks your receipt into NOVA classes (1 to 4) 
+            and highlights hidden sodium, refined sugars, and missing micronutrients.
+          </p>
+          <ul class="persona-perks">
+            <li><i class="fa-solid fa-check text-blue"></i> NOVA Group 4 (Ultra-Processed) proportion warning</li>
+            <li><i class="fa-solid fa-check text-blue"></i> Vitamin & essential mineral cart diversity score</li>
+            <li><i class="fa-solid fa-check text-blue"></i> Explainable recommendations for whole-food alternatives</li>
+          </ul>
+          <div class="persona-quote">
+            "Finally an app that looks at my actual grocery items instead of nagging me after I eat them."
+          </div>
+        </div>
+
+        <!-- Persona 4: PG & Hostel Students -->
+        <div class="persona-card card-border-neutral">
+          <div class="persona-icon-circle neutral-bg">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h4>Hostel & PG Students</h4>
+          <span class="persona-tagline">Strict allowance management & transparent roommate splits</span>
+          <p class="persona-summary">
+            Living on a fixed monthly stipend where every rupee matters. 
+            Pantrix provides itemized digital receipts with verified shared costs and prevents end-of-month budget depletion.
+          </p>
+          <ul class="persona-perks">
+            <li><i class="fa-solid fa-check text-blue"></i> 100% digitized line-item receipts for easy expense sharing</li>
+            <li><i class="fa-solid fa-check text-blue"></i> Early burn-rate warning before stipend runs dry</li>
+            <li><i class="fa-solid fa-check text-blue"></i> Offline storage with zero private cloud lock-in</li>
+          </ul>
+          <div class="persona-quote">
+            "We snap the grocery slip, verify the items in 5 seconds, and everyone knows their exact share."
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Problem Statement (The Modern Consumer Dilemma) -->
+  <section class="problem-section" id="problem">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">The Core Problem</span>
+        <h2 class="section-title">Why Current Apps & Manual Tracking Fail</h2>
+        <p class="section-desc">
+          Every time you check out at the supermarket, rich item-level data is printed on thermal paper. 
+          The moment you walk out, that data is permanently lost.
+        </p>
+      </div>
+
+      <!-- Side-by-Side Comparison Matrix -->
+      <div class="comparison-grid">
+        
+        <!-- The Old Broken Way -->
+        <div class="comparison-col broken-col">
+          <div class="col-header">
+            <div class="col-status-icon bad"><i class="fa-solid fa-circle-xmark"></i></div>
+            <div>
+              <h3>The Fragmented Dilemma</h3>
+              <span class="col-sub">Manual, Tedious & Siloed</span>
+            </div>
+          </div>
+
+          <div class="dilemma-timeline">
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-receipt"></i></div>
+              <div class="t-info">
+                <strong>Data Dies on Paper</strong>
+                <p>Receipt gets crumpled, thermal ink fades in weeks, or paper is tossed into the bin.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-keyboard"></i></div>
+              <div class="t-info">
+                <strong>Exhausting Manual Typing</strong>
+                <p>Users must open 3-4 apps (Mint for money, MyFitnessPal for calories, Notes for pantry) and type every single row.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-eye-slash"></i></div>
+              <div class="t-info">
+                <strong>No Item-Level Intelligence</strong>
+                <p>Budget apps only see "₹6,000 at Supermarket". They cannot tell you <em>why</em> you overspent or which items caused it.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge"><i class="fa-solid fa-user-xmark"></i></div>
+              <div class="t-info">
+                <strong>High Friction & User Abandonment</strong>
+                <p>82% of users abandon manual logging apps within 14 days due to sheer cognitive fatigue.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-box bad-result">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Result: Zero insight into diet quality, chronic budget leakage, and wasted time.</span>
+          </div>
+        </div>
+
+        <!-- The Pantrix Way -->
+        <div class="comparison-col solution-col">
+          <div class="col-header">
+            <div class="col-status-icon good"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>The Pantrix Paradigm</h3>
+              <span class="col-sub">Zero-Typing, Explainable & Unified</span>
+            </div>
+          </div>
+
+          <div class="dilemma-timeline">
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-camera"></i></div>
+              <div class="t-info">
+                <strong>Single Mobile Photo Snap</strong>
+                <p>Point camera at crumpled, skewed thermal paper. OpenCV automatically deskews, normalizes lighting, and unsharp masks.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-robot"></i></div>
+              <div class="t-info">
+                <strong>PaddleOCR + LayoutLMv3 Extraction</strong>
+                <p>Spatial transformer extracts line items, quantities, and prices with 92.4% F1-score in under 3.2 seconds.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-pen-to-square"></i></div>
+              <div class="t-info">
+                <strong>Human-in-the-Loop Table Verification</strong>
+                <p>Editable digital receipt allows 1-tap correction of OCR misreads before downstream calculations, ensuring 100% fidelity.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <div class="t-badge good-t"><i class="fa-solid fa-chart-pie"></i></div>
+              <div class="t-info">
+                <strong>Tri-Mode Intelligence & SHAP Explanations</strong>
+                <p>Instant breakdown across Save Money, Eat Healthy, and Gain Muscle with mathematical feature attribution and LLM advice.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-box good-result">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Result: 360° financial, health & fitness control from a single 5-second scan.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Project Objectives (Measurable Engineering Goals) -->
+  <section class="objectives-section" id="objectives">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Final Year Capstone Goals</span>
+        <h2 class="section-title">Project Engineering Objectives</h2>
+        <p class="section-desc">
+          Clearly defined, scientifically measurable engineering goals guiding the architecture and evaluation of the system.
+        </p>
+      </div>
+
+      <div class="objectives-grid">
+        
+        <div class="objective-card">
+          <div class="obj-num">01</div>
+          <div class="obj-content">
+            <h4>Intelligent Item-Level Extraction</h4>
+            <p>
+              Develop a multi-stage document intelligence pipeline utilizing PaddleOCR (DB-Net + CRNN) and fine-tuned LayoutLMv3 
+              to accurately extract structured line items, quantities, and prices from noisy, skewed receipts.
+            </p>
+            <div class="obj-kpi">
+              <span class="kpi-tag"><i class="fa-solid fa-bullseye"></i> Target: F1-Score &gt; 90%</span>
+              <span class="kpi-tag"><i class="fa-solid fa-clock"></i> Latency &lt; 4.0s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="objective-card">
+          <div class="obj-num">02</div>
+          <div class="obj-content">
+            <h4>Human-in-the-Loop Reconstruction</h4>
+            <p>
+              Reconstruct scanned receipt data into an interactive, editable digital interface allowing users to correct any misrecognized 
+              characters in under 3 taps, ensuring 100% data fidelity prior to running sensitive financial and nutritional calculations.
+            </p>
+            <div class="obj-kpi">
+              <span class="kpi-tag"><i class="fa-solid fa-bullseye"></i> 100% Ground Truth Fidelity</span>
+              <span class="kpi-tag"><i class="fa-solid fa-arrow-pointer"></i> &lt; 3 Taps Per Correction</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="objective-card">
+          <div class="obj-num">03</div>
+          <div class="obj-content">
+            <h4>Tri-Mode Behavioral Analytics Engine</h4>
+            <p>
+              Engineer a parallel multi-mode analytics engine calculating simultaneous lifestyle indicators: 
+              <strong>Financial Baselines</strong> (EWMA rolling expenditure), <strong>Nutritional Profile</strong> (NOVA index & micronutrients), 
+              and <strong>Muscle Hypertrophy</strong> (protein efficiency & amino acids).
+            </p>
+            <div class="obj-kpi">
+              <span class="kpi-tag"><i class="fa-solid fa-bullseye"></i> 3 Simultaneous Dimensions</span>
+              <span class="kpi-tag"><i class="fa-solid fa-database"></i> Hybrid Semantic DB Matching</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="objective-card">
+          <div class="obj-num">04</div>
+          <div class="obj-content">
+            <h4>Explainable AI (XAI) with SHAP</h4>
+            <p>
+              Integrate Isolation Forest anomaly detection paired with SHAP (SHapley Additive exPlanations) TreeExplainer 
+              to demystify spending spikes and nutritional deviations down to specific offending line items rather than opaque black-box alerts.
+            </p>
+            <div class="obj-kpi">
+              <span class="kpi-tag"><i class="fa-solid fa-bullseye"></i> Shapley Feature Attribution</span>
+              <span class="kpi-tag"><i class="fa-solid fa-shield"></i> Hallucination Guardrails</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="objective-card">
+          <div class="obj-num">05</div>
+          <div class="obj-content">
+            <h4>Guarded LLM Natural Language Guidance</h4>
+            <p>
+              Deploy a hallucination-controlled LLM synthesis layer (Gemini 1.5 Flash / Groq Llama 3) translating raw matrix calculations, 
+              EWMA baseline shifts, and SHAP scores into concise, friendly, and actionable behavioral recommendations.
+            </p>
+            <div class="obj-kpi">
+              <span class="kpi-tag"><i class="fa-solid fa-bullseye"></i> Zero Math In LLM (Deterministic Guard)</span>
+              <span class="kpi-tag"><i class="fa-solid fa-bolt"></i> Streamed Synthesis</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Interactive Methodology & Architecture (The 9-Stage Pipeline) -->
+  <section class="pipeline-section" id="pipeline">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">System Methodology</span>
+        <h2 class="section-title">The 9-Stage Intelligent Architecture</h2>
+        <p class="section-desc">
+          Click any stage below to inspect its mathematical transformations, algorithms, inputs/outputs, and why it is critical.
+        </p>
+      </div>
+
+      <!-- Pipeline Interactive Stepper / Scrubber -->
+      <div class="pipeline-simulator-bar">
+        <div class="sim-controls">
+          <button class="btn btn-primary btn-sm" id="runPipelineSimBtn">
+            <i class="fa-solid fa-play"></i> Run Live Pipeline Simulation
+          </button>
+          <button class="btn btn-glass btn-sm" id="resetPipelineBtn">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+          <span class="sim-status" id="simStatusText">Ready: Click any stage to inspect</span>
+        </div>
+        <div class="sim-progress-track">
+          <div class="sim-progress-fill" id="simProgressFill"></div>
+        </div>
+      </div>
+
+      <!-- Anime.js Pipeline Flow SVG Motion Path -->
+      <div class="pipeline-motion-wrapper">
+        <svg class="pipeline-motion-svg" viewBox="0 0 1100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#990808"/>
+              <stop offset="35%" stop-color="#94B6EF"/>
+              <stop offset="70%" stop-color="#E6E279"/>
+              <stop offset="100%" stop-color="#2ecc71"/>
+            </linearGradient>
+            <filter id="packetGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Flowing Bezier Data Highway -->
+          <path id="pipelineMotionPath" class="pipeline-track" d="M 20,50 C 150,10 250,90 380,50 C 510,10 630,90 760,50 C 890,10 980,90 1080,50" stroke="url(#pipeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6" opacity="0.6"/>
+          
+          <!-- Moving Tensor Packets via Anime.js createMotionPath -->
+          <g id="pipelinePacket1" class="pipe-packet" filter="url(#packetGlow)">
+            <rect x="-22" y="-12" width="44" height="24" rx="6" fill="#990808" stroke="#ffffff" stroke-width="1.5" />
+            <text x="0" y="4" text-anchor="middle" font-size="9" font-family="'JetBrains Mono', monospace" fill="#ffffff" font-weight="bold">STAGE-1</text>
+          </g>
+          <g id="pipelinePacket2" class="pipe-packet" filter="url(#packetGlow)">
+            <rect x="-24" y="-12" width="48" height="24" rx="6" fill="#1e3a8a" stroke="#94B6EF" stroke-width="1.5" />
+            <text x="0" y="4" text-anchor="middle" font-size="9" font-family="'JetBrains Mono', monospace" fill="#ffffff" font-weight="bold">OCR+LLM</text>
+          </g>
+          <g id="pipelinePacket3" class="pipe-packet" filter="url(#packetGlow)">
+            <rect x="-20" y="-12" width="40" height="24" rx="6" fill="#8a7a00" stroke="#E6E279" stroke-width="1.5" />
+            <text x="0" y="4" text-anchor="middle" font-size="9" font-family="'JetBrains Mono', monospace" fill="#ffffff" font-weight="bold">SHAP</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 9 Interactive Stage Cards Grid -->
+      <div class="pipeline-stages-grid" id="stagesContainer">
+        
+        <!-- Stage 1 -->
+        <div class="stage-card active-stage" data-stage="1">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 01</span>
+            <span class="stage-tech">OpenCV</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-camera-rotate"></i></div>
+          <h4>Preprocessing &amp; Dewarping</h4>
+          <p class="stage-summary">CLAHE lighting normalization + 4-point Canny perspective warp.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="stage-card" data-stage="2">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 02</span>
+            <span class="stage-tech">PaddleOCR</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-font"></i></div>
+          <h4>Text Detection &amp; Recognition</h4>
+          <p class="stage-summary">DB-Net text segmentation + CRNN-CTC character decoding.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="stage-card" data-stage="3">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 03</span>
+            <span class="stage-tech">Python Math</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-ruler-combined"></i></div>
+          <h4>Coordinate Normalization</h4>
+          <p class="stage-summary">Optical token recovery + 0-1000 resolution scaling.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="stage-card" data-stage="4">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 04</span>
+            <span class="stage-tech">LayoutLMv3</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+          <h4>Semantic Entity Parsing</h4>
+          <p class="stage-summary">Multimodal embeddings + spatial Y-axis line item clustering.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="stage-card" data-stage="5">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 05</span>
+            <span class="stage-tech">React Native</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-table-list"></i></div>
+          <h4>Digital Reconstruction</h4>
+          <p class="stage-summary">Editable tabular UI with human-in-the-loop ground truth verification.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 6 -->
+        <div class="stage-card" data-stage="6">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 06</span>
+            <span class="stage-tech">RapidFuzz + Neural</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <h4>Food Database Matching</h4>
+          <p class="stage-summary">Syntactic fuzzy ratios + SentenceTransformer vector embeddings.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 7 -->
+        <div class="stage-card" data-stage="7">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 07</span>
+            <span class="stage-tech">Pandas EWMA</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+          <h4>Behavioral Baseline Tracking</h4>
+          <p class="stage-summary">Exponentially Weighted Moving Average (&alpha;=0.3) spending model.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 8 -->
+        <div class="stage-card" data-stage="8">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 08</span>
+            <span class="stage-tech">Isolation Forest + SHAP</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-project-diagram"></i></div>
+          <h4>Anomaly Detection &amp; XAI</h4>
+          <p class="stage-summary">Unsupervised outlier trees + Shapley game-theoretic attribution.</p>
+          <div class="stage-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <!-- Stage 9 -->
+        <div class="stage-card" data-stage="9">
+          <div class="stage-header">
+            <span class="stage-tag">Stage 09</span>
+            <span class="stage-tech">Guarded LLM</span>
+          </div>
+          <div class="stage-icon-wrap"><i class="fa-solid fa-comments"></i></div>
+          <h4>Natural Language Synthesis</h4>
+          <p class="stage-summary">Context-injected prompt delivery with deterministic fact guards.</p>
+        </div>
+
+      </div>
+
+      <!-- Deep Dive Inspector Panel for Active Stage -->
+      <div class="stage-inspector-card" id="stageInspector">
+        <div class="inspector-header">
+          <div class="inspector-title-group">
+            <span class="badge badge-accent" id="inspStageNum">Stage 01 Deep Dive</span>
+            <h3 id="inspStageTitle">Preprocessing &amp; Perspective De-warping</h3>
+          </div>
+          <div class="inspector-tech-badge" id="inspTech">OpenCV &bull; Python</div>
+        </div>
+
+        <div class="inspector-body-grid">
+          <!-- Text Specifications -->
+          <div class="insp-details-col">
+            <div class="insp-section">
+              <h5><i class="fa-solid fa-circle-question"></i> Why is this stage necessary?</h5>
+              <p id="inspWhy">
+                Mobile cameras capture receipts under uneven shadows, creased angles, and thermal printer fading. 
+                Running OCR directly on raw photos degrades recognition accuracy below 60%. Preprocessing flattens 
+                and normalizes lighting to maximize character edge contrast.
+              </p>
+            </div>
+
+            <div class="insp-section">
+              <h5><i class="fa-solid fa-gear"></i> Technical Mechanism &amp; Algorithm</h5>
+              <p id="inspAlgorithm">
+                1. Convert BGR image to LAB color space, apply <strong>CLAHE (Contrast Limited Adaptive Histogram Equalization)</strong> on L-channel.<br>
+                2. Detect receipt perimeter corners via <code>cv2.Canny()</code> and <code>cv2.approxPolyDP()</code>.<br>
+                3. Compute 3x3 homography matrix with <code>cv2.getPerspectiveTransform()</code> and warp to clean top-down rectangle.
+              </p>
+            </div>
+
+            <div class="insp-io-grid">
+              <div class="io-box">
+                <span class="io-label">Input</span>
+                <code id="inspInput">Raw JPEG/PNG Mobile Photo (1080p-4K, BGR NumPy Array)</code>
+              </div>
+              <div class="io-box">
+                <span class="io-label">Output</span>
+                <code id="inspOutput">Flattened, Contrast-Equalized Rectangular Matrix (np.ndarray)</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code / Visual Snippet -->
+          <div class="insp-code-col">
+            <div class="code-terminal-header">
+              <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              <span class="code-terminal-title" id="inspCodeTitle">clahe_dewarp.py</span>
+            </div>
+            <pre class="code-block"><code id="inspCodeSnippet"># Stage 1: Lighting Normalization + Dewarping
+def preprocess_receipt(image_bytes):
+    img = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), cv2.IMREAD_COLOR)
+    # CLAHE on L-channel in LAB space
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    cl = clahe.apply(l)
+    normalized = cv2.cvtColor(cv2.merge((cl,a,b)), cv2.COLOR_LAB2BGR)
+    
+    # 4-Corner Homography Perspective Correction
+    corners = detect_quadrilateral_corners(normalized)
+    M = cv2.getPerspectiveTransform(corners, target_rect)
+    dewarped = cv2.warpPerspective(normalized, M, (W, H))
+    return dewarped</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: Tri-Mode Feature Showcase -->
+  <section class="trimode-section" id="tri-mode">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Triple Lifestyle Intelligence</span>
+        <h2 class="section-title">The Tri-Mode Analytical Engine</h2>
+        <p class="section-desc">
+          One receipt scan concurrently fuels three distinct engines. Toggle below to test the interactive simulation:
+        </p>
+      </div>
+
+      <!-- Mode Selector Tabs -->
+      <div class="tri-mode-tabs-nav">
+        <button class="tri-tab-btn active" data-mode="money">
+          <div class="tab-btn-icon red-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+          <div class="tab-btn-text">
+            <strong>Save Money</strong>
+            <span>EWMA Baseline &amp; SHAP Anomaly</span>
+          </div>
+        </button>
+
+        <button class="tri-tab-btn" data-mode="health">
+          <div class="tab-btn-icon blue-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="tab-btn-text">
+            <strong>Eat Healthy</strong>
+            <span>NOVA Index &amp; Micronutrients</span>
+          </div>
+        </button>
+
+        <button class="tri-tab-btn" data-mode="muscle">
+          <div class="tab-btn-icon yellow-icon"><i class="fa-solid fa-dumbbell"></i></div>
+          <div class="tab-btn-text">
+            <strong>Gain Muscle</strong>
+            <span>Protein Density &amp; Amino Profile</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Mode Content Card 1: Save Money -->
+      <div class="tri-mode-panel active-panel" id="panel-money">
+        <div class="panel-layout-grid">
+          
+          <div class="panel-left-content">
+            <div class="mode-badge-pill red-pill">Financial Behavioral Intelligence</div>
+            <h3 class="panel-heading">Explainable Overspending &amp; Smart Swaps</h3>
+            <p class="panel-description">
+              Pantrix builds a personalized <strong>Exponentially Weighted Moving Average (EWMA)</strong> of your grocery spending. 
+              When a cart breaches tolerance, an <strong>Isolation Forest</strong> flags the deviation, and <strong>SHAP TreeExplainer</strong> 
+              attributes exact rupees of variance to specific items.
+            </p>
+
+            <div class="interactive-control-box">
+              <label class="control-label">Test Budget Slider (Monthly Target): <span id="budgetValue">₹6,000</span></label>
+              <input type="range" class="custom-slider" id="budgetRange" min="3000" max="12000" step="500" value="6000">
+            </div>
+
+            <!-- Smart Brand Swap Recommendation -->
+            <div class="smart-swap-card">
+              <div class="swap-header">
+                <i class="fa-solid fa-arrow-right-arrow-left text-red"></i>
+                <span>Actionable Brand Swap Identified</span>
+              </div>
+              <div class="swap-body">
+                <div class="swap-item from">
+                  <span class="s-label">Purchased Item:</span>
+                  <strong>Deluxe Brand Greek Yogurt (₹180)</strong>
+                </div>
+                <div class="swap-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="swap-item to">
+                  <span class="s-label">Store Alternative:</span>
+                  <strong>Amul High-Protein Dahi (₹85)</strong>
+                </div>
+              </div>
+              <div class="swap-footer">
+                <span class="savings-tag">Recover ₹95 without losing protein content</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right-viz">
+            <!-- SHAP Waterfall Chart Simulation -->
+            <div class="viz-card">
+              <div class="viz-card-header">
+                <span><i class="fa-solid fa-chart-column text-red"></i> SHAP Feature Attribution (Variance Breakdown)</span>
+                <span class="badge-mini">Model: TreeExplainer</span>
+              </div>
+              <p class="viz-sub">Baseline Cart: ₹1,200 &bull; Actual Cart: ₹1,820 (+₹620 Anomaly)</p>
+
+              <div class="shap-bars-container">
+                
+                <div class="shap-bar-row">
+                  <div class="shap-item-label">
+                    <span>Deluxe Ice Cream (500ml)</span>
+                    <strong class="text-red">+₹240.00 (SHAP +0.48)</strong>
+                  </div>
+                  <div class="shap-track">
+                    <div class="shap-bar-fill red-fill" style="width: 78%;"></div>
+                  </div>
+                </div>
+
+                <div class="shap-bar-row">
+                  <div class="shap-item-label">
+                    <span>Branded Frozen Pizzas (x2)</span>
+                    <strong class="text-red">+₹190.00 (SHAP +0.31)</strong>
+                  </div>
+                  <div class="shap-track">
+                    <div class="shap-bar-fill red-fill" style="width: 62%;"></div>
+                  </div>
+                </div>
+
+                <div class="shap-bar-row">
+                  <div class="shap-item-label">
+                    <span>Imported Olive Oil (1L)</span>
+                    <strong class="text-red">+₹220.00 (SHAP +0.28)</strong>
+                  </div>
+                  <div class="shap-track">
+                    <div class="shap-bar-fill red-fill" style="width: 55%;"></div>
+                  </div>
+                </div>
+
+                <div class="shap-bar-row">
+                  <div class="shap-item-label">
+                    <span>Staples (Lentils &amp; Rice)</span>
+                    <strong class="text-blue">-₹30.00 (SHAP -0.07)</strong>
+                  </div>
+                  <div class="shap-track">
+                    <div class="shap-bar-fill blue-fill" style="width: 15%;"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Guarded LLM Output Block -->
+              <div class="guarded-llm-box">
+                <div class="g-header">
+                  <i class="fa-solid fa-shield-halved text-red"></i> Guarded LLM Natural Language Output
+                </div>
+                <p>
+                  "You overspent your grocery baseline by ₹620 this run. SHAP attribution shows 69% of this anomaly 
+                  arose from impulse luxury items (Ice Cream &amp; Frozen Pizzas). Swapping to store brands recovers ₹430 next trip."
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mode Content Card 2: Eat Healthy -->
+      <div class="tri-mode-panel" id="panel-health">
+        <div class="panel-layout-grid">
+          
+          <div class="panel-left-content">
+            <div class="mode-badge-pill blue-pill">Nutritional Quality Intelligence</div>
+            <h3 class="panel-heading">NOVA Classification &amp; Micronutrient Density</h3>
+            <p class="panel-description">
+              Pantrix maps every item to food ontology databases to compute your cart's 
+              <strong>NOVA Food Processing Score</strong> (from unprocessed whole foods to ultra-processed industrial formulations) 
+              and tracks micronutrient diversity.
+            </p>
+
+            <div class="health-kpi-row">
+              <div class="h-kpi-card">
+                <span class="h-title">Cart Health Score</span>
+                <span class="h-value text-blue">82 / 100</span>
+                <span class="h-status text-blue"><i class="fa-solid fa-check"></i> High Whole Foods</span>
+              </div>
+              <div class="h-kpi-card">
+                <span class="h-title">Ultra-Processed Ratio</span>
+                <span class="h-value text-red">18.4%</span>
+                <span class="h-status text-red"><i class="fa-solid fa-arrow-down"></i> -6% vs Last Week</span>
+              </div>
+            </div>
+
+            <!-- Nutrient Warnings List -->
+            <div class="nutrient-alerts-card">
+              <div class="alert-item">
+                <i class="fa-solid fa-triangle-exclamation text-yellow"></i>
+                <div>
+                  <strong>Sodium Concentration Alert</strong>
+                  <p>Canned soup and ramen pack 1,420mg sodium (62% of daily upper recommendation).</p>
+                </div>
+              </div>
+              <div class="alert-item">
+                <i class="fa-solid fa-circle-check text-blue"></i>
+                <div>
+                  <strong>Fiber Target Exceeded</strong>
+                  <p>Lentils and oats provide 38g of soluble and insoluble dietary fiber.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right-viz">
+            <div class="viz-card">
+              <div class="viz-card-header">
+                <span><i class="fa-solid fa-chart-pie text-blue"></i> NOVA Food Processing Distribution</span>
+                <span class="badge-mini">UN FAO Standard</span>
+              </div>
+
+              <!-- NOVA Ratio Visual Bar -->
+              <div class="nova-stacked-bar">
+                <div class="nova-segment nova-1" style="width: 52%;" title="Group 1: Unprocessed / Minimally Processed (52%)">52%</div>
+                <div class="nova-segment nova-2" style="width: 16%;" title="Group 2: Processed Culinary Ingredients (16%)">16%</div>
+                <div class="nova-segment nova-3" style="width: 14%;" title="Group 3: Processed Foods (14%)">14%</div>
+                <div class="nova-segment nova-4" style="width: 18%;" title="Group 4: Ultra-Processed Foods (18%)">18%</div>
+              </div>
+
+              <div class="nova-legend">
+                <span class="l-item"><span class="dot-color dot-n1"></span> Grp 1: Whole Foods (52%)</span>
+                <span class="l-item"><span class="dot-color dot-n2"></span> Grp 2: Culinary (16%)</span>
+                <span class="l-item"><span class="dot-color dot-n3"></span> Grp 3: Processed (14%)</span>
+                <span class="l-item"><span class="dot-color dot-n4"></span> Grp 4: Ultra-Processed (18%)</span>
+              </div>
+
+              <!-- Micronutrient Radar / Progress Bars -->
+              <div class="micro-bars-wrap">
+                <div class="micro-row">
+                  <div class="m-info"><span>Vitamin A &amp; Carotenoids</span><strong>84%</strong></div>
+                  <div class="m-track"><div class="m-fill blue-fill" style="width: 84%;"></div></div>
+                </div>
+                <div class="micro-row">
+                  <div class="m-info"><span>Iron &amp; Magnesium</span><strong>92%</strong></div>
+                  <div class="m-track"><div class="m-fill blue-fill" style="width: 92%;"></div></div>
+                </div>
+                <div class="micro-row">
+                  <div class="m-info"><span>Calcium</span><strong>65%</strong></div>
+                  <div class="m-track"><div class="m-fill yellow-fill" style="width: 65%;"></div></div>
+                </div>
+              </div>
+
+              <div class="guarded-llm-box">
+                <div class="g-header">
+                  <i class="fa-solid fa-shield-halved text-blue"></i> Guarded LLM Health Advisory
+                </div>
+                <p>
+                  "Your cart is 52% unprocessed fresh produce. To improve your Calcium score from 65% to 90%, 
+                  consider adding fortified milk or tofu on your next grocery run."
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mode Content Card 3: Gain Muscle -->
+      <div class="tri-mode-panel" id="panel-muscle">
+        <div class="panel-layout-grid">
+          
+          <div class="panel-left-content">
+            <div class="mode-badge-pill yellow-pill">Hypertrophy &amp; Athletic Fuel</div>
+            <h3 class="panel-heading">Grams Protein Per Rupee &amp; Macro Split</h3>
+            <p class="panel-description">
+              Stop typing every single food row into manual macro trackers. 
+              Pantrix analyzes your entire grocery receipt to determine your <strong>Total Usable Protein</strong>, 
+              <strong>Essential Amino Acid (EAA)</strong> balance, and <strong>Cost Efficiency per Gram of Protein</strong>.
+            </p>
+
+            <div class="muscle-kpi-row">
+              <div class="m-kpi-card">
+                <span class="m-title">Total Cart Protein</span>
+                <span class="m-value text-yellow">179.5g</span>
+                <span class="m-status text-yellow">89.8% of 200g Daily Goal</span>
+              </div>
+              <div class="m-kpi-card">
+                <span class="m-title">Protein Efficiency</span>
+                <span class="m-value text-yellow">₹1.82 / gram</span>
+                <span class="m-status text-yellow">Top 10% Cost-Efficient Cart</span>
+              </div>
+            </div>
+
+            <!-- EAA Profile Indicator -->
+            <div class="eaa-card">
+              <div class="eaa-title">
+                <i class="fa-solid fa-dna text-yellow"></i>
+                <span>Complete Protein Breakdown (Essential Amino Acids)</span>
+              </div>
+              <div class="eaa-tags">
+                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Leucine: 14.2g (Optimal)</span>
+                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Isoleucine: 9.8g</span>
+                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Valine: 10.4g</span>
+                <span class="eaa-tag"><i class="fa-solid fa-check"></i> Complete BCAA Profile</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right-viz">
+            <div class="viz-card">
+              <div class="viz-card-header">
+                <span><i class="fa-solid fa-dumbbell text-yellow"></i> Top Protein Contributors in Scanned Cart</span>
+                <span class="badge-mini">Bioavailability Ranked</span>
+              </div>
+
+              <!-- Protein Ranking Table -->
+              <div class="protein-ranking-list">
+                
+                <div class="p-rank-item">
+                  <div class="p-rank-meta">
+                    <span class="p-badge">1</span>
+                    <div>
+                      <strong>Chicken Breast (500g)</strong>
+                      <span class="p-sub">₹310 &bull; 105g Total Protein</span>
+                    </div>
+                  </div>
+                  <div class="p-rank-stat">
+                    <span class="eff-score">0.34g / ₹1</span>
+                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 100%;"></div></div>
+                  </div>
+                </div>
+
+                <div class="p-rank-item">
+                  <div class="p-rank-meta">
+                    <span class="p-badge">2</span>
+                    <div>
+                      <strong>Farm Fresh Eggs (Pack of 6)</strong>
+                      <span class="p-sub">₹75 &bull; 36g Total Protein</span>
+                    </div>
+                  </div>
+                  <div class="p-rank-stat">
+                    <span class="eff-score">0.48g / ₹1</span>
+                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 85%;"></div></div>
+                  </div>
+                </div>
+
+                <div class="p-rank-item">
+                  <div class="p-rank-meta">
+                    <span class="p-badge">3</span>
+                    <div>
+                      <strong>Amul Cow Milk (1L)</strong>
+                      <span class="p-sub">₹62 &bull; 32g Total Protein</span>
+                    </div>
+                  </div>
+                  <div class="p-rank-stat">
+                    <span class="eff-score">0.51g / ₹1</span>
+                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 72%;"></div></div>
+                  </div>
+                </div>
+
+                <div class="p-rank-item">
+                  <div class="p-rank-meta">
+                    <span class="p-badge">4</span>
+                    <div>
+                      <strong>Rolled Oats (500g)</strong>
+                      <span class="p-sub">₹95 &bull; 16g Total Protein</span>
+                    </div>
+                  </div>
+                  <div class="p-rank-stat">
+                    <span class="eff-score">0.17g / ₹1</span>
+                    <div class="p-mini-bar"><div class="p-bar-fill yellow-fill" style="width: 40%;"></div></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="guarded-llm-box">
+                <div class="g-header">
+                  <i class="fa-solid fa-shield-halved text-yellow"></i> Guarded LLM Muscle Advice
+                </div>
+                <p>
+                  "This grocery haul hits 179.5g protein with 3 high-bioavailability sources (Chicken, Eggs, Milk). 
+                  To hit your 200g target, add 100g of paneer or 2 tablespoons of peanut butter."
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 6: Demonstration & Video Player Showcase -->
+  <section class="demo-section" id="demo">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Live System In Action</span>
+        <h2 class="section-title">End-to-End Demonstration Player</h2>
+        <p class="section-desc">
+          Watch how Pantrix executes from raw camera shutter capture to interactive verification and AI insights:
+        </p>
+      </div>
+
+      <!-- Video / Interactive Showcase Card -->
+      <div class="demo-showcase-box">
+        <div class="demo-viewport">
+          
+          <!-- Mock Video Screen / Animation Canvas -->
+          <div class="demo-screen-canvas" id="demoCanvas">
+            
+            <!-- Chapter 1 Demo Slide -->
+            <div class="demo-slide active" data-chapter="1">
+              <div class="slide-badge"><i class="fa-solid fa-camera"></i> Chapter 01: Capture &amp; Preprocessing</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock">
+                  <img src="assets/sample-receipt.jpg" alt="Sample Raw Receipt" class="demo-receipt-img">
+                  <div class="demo-scan-laser"></div>
+                  <div class="demo-bbox bbox-1"></div>
+                  <div class="demo-bbox bbox-2"></div>
+                  <div class="demo-bbox bbox-3"></div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Real-Time Dewarping &amp; Text Detection</h4>
+                  <p>
+                    When the mobile camera shutter triggers, OpenCV checks document four-corner contours. 
+                    Uneven kitchen light is normalized with CLAHE before PaddleOCR identifies all ink polygons in 840ms.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> OpenCV Warp: 110ms</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> DB-Net Detection: 380ms</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> CRNN Recognition: 460ms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 2 Demo Slide -->
+            <div class="demo-slide" data-chapter="2">
+              <div class="slide-badge"><i class="fa-solid fa-layer-group"></i> Chapter 02: LayoutLMv3 Token Extraction</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock layoutlm-grid">
+                  <div class="token-chip token-item">menu.nm &bull; Amul Milk</div>
+                  <div class="token-chip token-qty">menu.cnt &bull; 2L</div>
+                  <div class="token-chip token-price">menu.price &bull; ₹124</div>
+                  <div class="token-chip token-item">menu.nm &bull; Chicken</div>
+                  <div class="token-chip token-price">menu.price &bull; ₹310</div>
+                  <div class="token-chip token-subtotal">subtotal &bull; ₹434</div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Multimodal Spatial Transformer</h4>
+                  <p>
+                    LayoutLMv3 reads not just the text characters, but their 0-1000 coordinate positions and image patches. 
+                    It aligns prices to their corresponding item names using Y-axis spatial clustering.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-check"></i> Entity F1: 92.4%</span>
+                    <span class="p-pill"><i class="fa-solid fa-check"></i> Zero OCR column slip</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 3 Demo Slide -->
+            <div class="demo-slide" data-chapter="3">
+              <div class="slide-badge"><i class="fa-solid fa-pen-to-square"></i> Chapter 03: Human-in-the-Loop Verification</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock table-mock">
+                  <table class="mock-data-table">
+                    <thead>
+                      <tr><th>Item Name</th><th>Qty</th><th>Price</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="editable-cell">Amul Milk 1L <i class="fa-solid fa-pencil text-red"></i></td>
+                        <td>2</td>
+                        <td>₹124</td>
+                        <td><span class="status-verified"><i class="fa-solid fa-check"></i></span></td>
+                      </tr>
+                      <tr>
+                        <td class="editable-cell">Chicken Breast <i class="fa-solid fa-pencil text-red"></i></td>
+                        <td>500g</td>
+                        <td>₹310</td>
+                        <td><span class="status-verified"><i class="fa-solid fa-check"></i></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>100% Fidelity Before Math Execution</h4>
+                  <p>
+                    Unlike blind AI systems that guess incorrectly, Pantrix renders an editable tabular UI in the mobile app. 
+                    Users can tap any row to fix a typo in 2 seconds before downstream databases calculate macros.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-hand-pointer"></i> &lt; 2 Clicks To Correct</span>
+                    <span class="p-pill"><i class="fa-solid fa-database"></i> SQLite Local Backup</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapter 4 Demo Slide -->
+            <div class="demo-slide" data-chapter="4">
+              <div class="slide-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Chapter 04: SHAP + Guarded LLM Delivery</div>
+              <div class="slide-visual-flex">
+                <div class="receipt-frame-mock insight-mock">
+                  <div class="mock-insight-bubble">
+                    <div class="ib-header"><i class="fa-solid fa-shield-halved text-red"></i> AI Advisor</div>
+                    <p>"Overspent weekly grocery budget by ₹340. 74% attributed to brand-name ice cream. Switching to store-brand recovers ₹210."</p>
+                  </div>
+                </div>
+                <div class="demo-slide-info">
+                  <h4>Deterministic Guardrails &amp; Natural Language</h4>
+                  <p>
+                    All mathematical totals, protein counts, and SHAP features are calculated deterministically in Python. 
+                    The LLM is only tasked with phrasing the explanation, completely preventing mathematical hallucinations.
+                  </p>
+                  <div class="demo-stats-pills">
+                    <span class="p-pill"><i class="fa-solid fa-shield"></i> Zero Hallucination Risk</span>
+                    <span class="p-pill"><i class="fa-solid fa-bolt"></i> Gemini / Groq Llama 3</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Video Controls Toolbar -->
+          <div class="demo-controls-bar">
+            <button class="ctrl-btn" id="demoPlayBtn" aria-label="Play/Pause Demonstration">
+              <i class="fa-solid fa-pause"></i>
+            </button>
+            <div class="demo-timeline-track">
+              <div class="demo-timeline-progress" id="demoTimelineProgress"></div>
+            </div>
+            <span class="demo-time-display" id="demoTimeText">01 / 04</span>
+            <button class="ctrl-btn" id="demoNextBtn" aria-label="Next Chapter">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Chapter Selector Navigation -->
+        <div class="demo-chapters-nav">
+          <button class="chapter-btn active" data-target-chapter="1">
+            <span class="ch-num">01</span>
+            <div>
+              <strong>Camera Scan &amp; Dewarping</strong>
+              <span>OpenCV + CLAHE + 4-Point Homography</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="2">
+            <span class="ch-num">02</span>
+            <div>
+              <strong>LayoutLMv3 Extraction</strong>
+              <span>Multimodal Token Classification</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="3">
+            <span class="ch-num">03</span>
+            <div>
+              <strong>Human Verification Table</strong>
+              <span>Editable React Native Interface</span>
+            </div>
+          </button>
+          <button class="chapter-btn" data-target-chapter="4">
+            <span class="ch-num">04</span>
+            <div>
+              <strong>SHAP &amp; Guarded LLM</strong>
+              <span>Explainable AI Insights Delivery</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Interactive Documentation & API Explorer -->
+  <section class="api-section" id="api-docs">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">System Interface Specification</span>
+        <h2 class="section-title">Interactive API &amp; Architecture Explorer</h2>
+        <p class="section-desc">
+          Test live request schemas, response payloads, and endpoint documentation matching the FastAPI backend:
+        </p>
+      </div>
+
+      <div class="api-explorer-box">
+        <!-- API Endpoint Selector Sidebar -->
+        <div class="api-endpoints-list">
+          <div class="api-list-title">RESTful API Endpoints</div>
+          
+          <button class="api-endpoint-btn active" data-endpoint="upload">
+            <span class="http-badge post">POST</span>
+            <div class="endpoint-name">
+              <strong>/api/v1/receipt/upload</strong>
+              <span>Ingest image &amp; extract LayoutLMv3</span>
+            </div>
+          </button>
+
+          <button class="api-endpoint-btn" data-endpoint="save-money">
+            <span class="http-badge post">POST</span>
+            <div class="endpoint-name">
+              <strong>/api/v1/analytics/save-money</strong>
+              <span>EWMA baseline &amp; brand swaps</span>
+            </div>
+          </button>
+
+          <button class="api-endpoint-btn" data-endpoint="shap">
+            <span class="http-badge post">POST</span>
+            <div class="endpoint-name">
+              <strong>/api/v1/explain/shap</strong>
+              <span>TreeExplainer anomaly attribution</span>
+            </div>
+          </button>
+
+          <button class="api-endpoint-btn" data-endpoint="nutrition">
+            <span class="http-badge post">POST</span>
+            <div class="endpoint-name">
+              <strong>/api/v1/analytics/nutrition</strong>
+              <span>NOVA classification &amp; protein density</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- API Request / Response Viewer -->
+        <div class="api-details-pane">
+          <div class="api-pane-header">
+            <div class="api-title-row">
+              <span class="http-badge post" id="apiActiveMethod">POST</span>
+              <code class="endpoint-url" id="apiActiveUrl">https://api.pantrix.ai/api/v1/receipt/upload</code>
+            </div>
+            <button class="btn btn-glass btn-sm" id="copyCurlBtn">
+              <i class="fa-regular fa-copy"></i> Copy cURL
+            </button>
+          </div>
+
+          <div class="api-tabs-row">
+            <button class="api-tab-link active" data-tab="curl">cURL Command</button>
+            <button class="api-tab-link" data-tab="req">Request Payload</button>
+            <button class="api-tab-link" data-tab="res">Live JSON Response</button>
+          </div>
+
+          <div class="api-code-wrapper">
+            <pre class="api-code-block"><code id="apiCodeDisplay">curl -X POST "https://api.pantrix.ai/api/v1/receipt/upload" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@receipt_scan.jpg" \
+  -F "user_id=1"</code></pre>
+          </div>
+
+          <div class="api-pane-footer">
+            <div class="res-badge-status">
+              <span class="status-indicator-green"></span>
+              <span>HTTP 200 OK &bull; Response Time: 1,840ms</span>
+            </div>
+            <span class="api-schema-tag">Content-Type: application/json; charset=utf-8</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Project Progress & Milestone Roadmap -->
+  <section class="roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Engineering Execution</span>
+        <h2 class="section-title">Milestone Progress &amp; Future Scope</h2>
+        <p class="section-desc">
+          Structured phased roadmap illustrating past achievements, current capstone deliverables, and future commercial scaling:
+        </p>
+      </div>
+
+      <div class="roadmap-grid">
+        
+        <!-- Phase 1: Completed -->
+        <div class="roadmap-card completed-phase">
+          <div class="roadmap-status-badge">
+            <i class="fa-solid fa-circle-check"></i> Completed
+          </div>
+          <span class="phase-tag">Phase 01</span>
+          <h4>Optical Vision &amp; OCR Pipeline</h4>
+          <p class="phase-desc">
+            Implemented OpenCV CLAHE lighting normalization, Canny edge detection, 4-point homography dewarping, and PaddleOCR (DB-Net + CRNN) extraction benchmarks.
+          </p>
+          <ul class="phase-list">
+            <li><i class="fa-solid fa-check"></i> 4-Point Homography Warp (OpenCV)</li>
+            <li><i class="fa-solid fa-check"></i> PaddleOCR DB-Net integration</li>
+            <li><i class="fa-solid fa-check"></i> Sub-second OCR extraction on 1080p images</li>
+          </ul>
+        </div>
+
+        <!-- Phase 2: Completed -->
+        <div class="roadmap-card completed-phase">
+          <div class="roadmap-status-badge">
+            <i class="fa-solid fa-circle-check"></i> Completed
+          </div>
+          <span class="phase-tag">Phase 02</span>
+          <h4>LayoutLMv3 Semantic Classification</h4>
+          <p class="phase-desc">
+            Fine-tuned multimodal transformer with normalized 0-1000 coordinate grids, implemented Y-axis spatial clustering, and built editable tabular reconstruction.
+          </p>
+          <ul class="phase-list">
+            <li><i class="fa-solid fa-check"></i> Multimodal token classification (menu.nm, price)</li>
+            <li><i class="fa-solid fa-check"></i> Y-axis spatial grouping for misaligned thermal columns</li>
+            <li><i class="fa-solid fa-check"></i> Entity F1-score validated at 92.4%</li>
+          </ul>
+        </div>
+
+        <!-- Phase 3: Active Capstone Delivery -->
+        <div class="roadmap-card active-phase">
+          <div class="roadmap-status-badge current-pulse">
+            <i class="fa-solid fa-spinner fa-spin"></i> Current Stage (Capstone)
+          </div>
+          <span class="phase-tag">Phase 03</span>
+          <h4>Tri-Mode Analytics &amp; SHAP Explainability</h4>
+          <p class="phase-desc">
+            Engineered EWMA expenditure models, Isolation Forest anomaly triggers, SHAP TreeExplainer feature attribution, and Guarded LLM advice synthesis.
+          </p>
+          <ul class="phase-list">
+            <li><i class="fa-solid fa-check"></i> Save Money: EWMA baseline + brand-swap engine</li>
+            <li><i class="fa-solid fa-check"></i> Eat Healthy: NOVA index + micronutrient coverage</li>
+            <li><i class="fa-solid fa-check"></i> Gain Muscle: Protein per rupee &amp; amino acid profile</li>
+            <li><i class="fa-solid fa-check"></i> SHAP feature attribution waterfall implementation</li>
+          </ul>
+        </div>
+
+        <!-- Phase 4: Future Scope -->
+        <div class="roadmap-card future-phase">
+          <div class="roadmap-status-badge future-badge">
+            <i class="fa-solid fa-clock"></i> Future Scope
+          </div>
+          <span class="phase-tag">Phase 04</span>
+          <h4>Edge AI &amp; Retail Loyalty APIs</h4>
+          <p class="phase-desc">
+            Model quantization for 100% on-device OCR inference (ONNX Runtime / CoreML), direct integration with retail e-receipt APIs (DMart, Reliance Fresh), and regional language receipts.
+          </p>
+          <ul class="phase-list">
+            <li><i class="fa-solid fa-arrow-right"></i> On-Device Quantized Mobile LayoutLM (INT8)</li>
+            <li><i class="fa-solid fa-arrow-right"></i> Direct Supermarket POS API sync</li>
+            <li><i class="fa-solid fa-arrow-right"></i> Indic OCR support (Hindi, Tamil, Telugu)</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Research Team & Mentors -->
+  <section class="team-section" id="team">
+    <div class="container">
+      <div class="section-heading-center">
+        <span class="section-subtitle">Academic Research &amp; Engineering</span>
+        <h2 class="section-title">Research Team &amp; Academic Advisors</h2>
+        <p class="section-desc">
+          Developed as a Final Year Capstone Project in Computer Science &amp; Engineering:
+        </p>
+      </div>
+
+      <div class="team-grid">
+        
+        <!-- Member 1: Uhashini -->
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <div class="avatar-letter">U</div>
+          </div>
+          <h4 class="member-name">Uhashini</h4>
+          <span class="member-role">Lead Architect &bull; Computer Vision &amp; Deep Learning</span>
+          <p class="member-bio">
+            Spearheaded OpenCV CLAHE &amp; perspective dewarping pipeline, PaddleOCR integration, 
+            and LayoutLMv3 multimodal spatial transformer fine-tuning for receipt entity recognition.
+          </p>
+          <div class="member-socials">
+            <a href="https://github.com/Uhashini" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="mailto:uhashininithilan@gmail.com" class="social-link" title="Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 2: Banda Vyshnavisai -->
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <div class="avatar-letter">V</div>
+          </div>
+          <h4 class="member-name">Banda Vyshnavisai</h4>
+          <span class="member-role">Lead Full-Stack Mobile &amp; Explainable AI Engineer</span>
+          <p class="member-bio">
+            Engineered the React Native cross-platform mobile frontend, EWMA baseline algorithms, 
+            Isolation Forest anomaly detection, and SHAP TreeExplainer feature attribution module.
+          </p>
+          <div class="member-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="mailto:vyshnavisaib@gmail.com" class="social-link" title="Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mentor / Advisor Card -->
+        <div class="team-card advisor-card">
+          <div class="team-avatar-box advisor-avatar">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <h4 class="member-name">Project Guide &amp; Academic Advisors</h4>
+          <span class="member-role">Department of Computer Science &amp; Engineering</span>
+          <p class="member-bio">
+            Mentorship provided in statistical anomaly detection (Isolation Forest), multimodal transformer evaluation 
+            metrics, and ethical human-in-the-loop design principles for explainable consumer AI.
+          </p>
+          <div class="advisor-badge-row">
+            <span class="advisor-tag"><i class="fa-solid fa-award"></i> Capstone Guide</span>
+            <span class="advisor-tag"><i class="fa-solid fa-university"></i> Final Year Review</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top-row">
+        
+        <div class="footer-brand-col">
+          <div class="brand-logo footer-logo">
+            <div class="logo-box">
+              <img src="assets/icon.png" alt="Pantrix Logo" class="brand-icon">
+            </div>
+            <div class="brand-name-group">
+              <span class="brand-title">Pantrix<span class="dot">.</span></span>
+              <span class="brand-tag">Explainable Receipt AI</span>
+            </div>
+          </div>
+          <p class="footer-motto">
+            An Explainable Expense, Nutrition, and Muscle Intelligence System for Complex Bills. 
+            Bridging document intelligence and daily behavioral optimization.
+          </p>
+          <div class="footer-badges">
+            <span class="f-pill"><i class="fa-solid fa-code"></i> 100% Open Architecture</span>
+            <span class="f-pill"><i class="fa-solid fa-shield"></i> Privacy-First Processing</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>System Navigation</h5>
+          <ul>
+            <li><a href="#problem">The Problem</a></li>
+            <li><a href="#objectives">Project Objectives</a></li>
+            <li><a href="#pipeline">9-Stage Pipeline</a></li>
+            <li><a href="#tri-mode">Tri-Mode Showcase</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Engineering Docs</h5>
+          <ul>
+            <li><a href="#api-docs">API Explorer</a></li>
+            <li><a href="#demo">Interactive Demo</a></li>
+            <li><a href="#roadmap">Project Milestones</a></li>
+            <li><a href="https://github.com/Uhashini/Pantrix-Website" target="_blank">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Academic References</h5>
+          <ul>
+            <li><a href="https://arxiv.org/abs/2204.08387" target="_blank" rel="noopener noreferrer">LayoutLMv3 (Xu et al.)</a></li>
+            <li><a href="https://arxiv.org/abs/2009.09941" target="_blank" rel="noopener noreferrer">PaddleOCR (Du et al.)</a></li>
+            <li><a href="https://arxiv.org/abs/1705.07874" target="_blank" rel="noopener noreferrer">SHAP XAI (Lundberg et al.)</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 Pantrix Research Project. Designed &amp; Engineered by Uhashini &amp; Banda Vyshnavisai.</p>
+        <div class="footer-sub-links">
+          <span>Final Year Capstone Project</span>
+          <span class="dot-sep">&bull;</span>
+          <span>MIT Licensed</span>
+          <span class="dot-sep">&bull;</span>
+          <a href="#hero">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast -->
+  <div class="toast-notification" id="toastNotice">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Snippet copied to clipboard!</span>
+  </div>
+
+  <!-- Anime.js v4 UMD Bundle (with native createMotionPath) -->
+  <script src="assets/anime.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
