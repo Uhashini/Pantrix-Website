@@ -2912,138 +2912,46 @@ body {
   z-index: 10;
 }
 
-.docs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.doc-card {
-  background: rgba(24, 22, 32, 0.75);
-  border: 1px solid var(--border-dark);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  transition: var(--transition-medium);
-  position: relative;
-}
-
-.doc-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(148, 182, 239, 0.5);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-}
-
-.doc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.85rem;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.doc-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.badge-red { background: rgba(153, 8, 8, 0.2); color: #ff6b6b; border: 1px solid rgba(153, 8, 8, 0.35); }
-.badge-blue { background: rgba(148, 182, 239, 0.2); color: var(--secondary); border: 1px solid rgba(148, 182, 239, 0.35); }
-.badge-yellow { background: rgba(230, 226, 121, 0.2); color: var(--accent); border: 1px solid rgba(230, 226, 121, 0.35); }
-.badge-green { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.35); }
-.badge-purple { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
-.badge-cyan { background: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.35); }
-
-.doc-file-tag {
-  font-family: var(--font-code);
-  font-size: 0.68rem;
-  color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.doc-card h4 {
-  font-family: var(--font-display);
-  font-size: 1.12rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.doc-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  flex: 1;
-}
-
-.doc-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-.doc-tags span {
-  font-size: 0.7rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #ddd;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.doc-link-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--secondary);
-  font-size: 0.82rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 0.65rem;
-  transition: var(--transition-fast);
-}
-
-.doc-link-btn:hover {
-  color: #fff;
-}
-
 .docs-cta-banner {
   background: linear-gradient(135deg, rgba(24, 22, 32, 0.95), rgba(16, 26, 45, 0.85));
   border: 1px solid rgba(148, 182, 239, 0.25);
   border-radius: var(--radius-lg);
-  padding: 1.5rem 2rem;
+  padding: 2rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-medium);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.docs-cta-banner:hover {
+  border-color: rgba(148, 182, 239, 0.45);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55);
 }
 
 .docs-cta-text h4 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #fff;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
+}
+
+.docs-cta-text h4 i {
+  color: var(--secondary);
 }
 
 .docs-cta-text p {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
+  max-width: 650px;
+  line-height: 1.5;
 }
 
 /* Roadmap Section */

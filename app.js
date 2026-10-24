@@ -851,7 +851,7 @@ function initScrollAnimationsAndSpy() {
 
   // B. Scroll Reveal Animations via IntersectionObserver
   const revealElements = document.querySelectorAll(
-    '.section-heading-center, .capstone-banner, .persona-card, .comparison-col, .objective-card, .doc-card, .team-card, .advisor-spotlight-card, .roadmap-card'
+    '.section-heading-center, .capstone-banner, .persona-card, .comparison-col, .objective-card, .team-card, .advisor-spotlight-card, .roadmap-card'
   );
 
   revealElements.forEach((el) => el.classList.add('reveal-on-scroll'));

@@ -74,7 +74,7 @@
       <div class="nav-actions">
         <a href="#project-overview" class="btn btn-secondary btn-sm">
           <i class="fa-solid fa-award"></i>
-          <span>Panel 1 Review</span>
+          <span></span>
         </a>
         <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
           <i class="fa-brands fa-github"></i>
@@ -133,7 +133,7 @@
         <p class="hero-lead">
           Every grocery bill contains rich, itemized micro-data that dies in the trash bin. 
           <strong>Pantrix</strong> bridges physical receipt scans into continuous, 360-degree behavioral analytics across 
-          <strong>Financial Savings</strong>, <strong>Nutrition Balance</strong>, and <strong>Muscle Hypertrophy</strong> — completely eliminating manual data entry.
+          <strong>Financial Savings</strong>, <strong>Nutrition Balance</strong> and <strong>Muscle Hypertrophy</strong>, eliminating manual data entry.
         </p>
 
         <div class="hero-cta-group">
@@ -1572,140 +1572,10 @@ def preprocess_receipt(image_bytes):
     </div>
   </section>
 
-  <!-- Section 8: Engineering Documentation Hub -->
+  <!-- Section 8: Technical Documentation -->
   <section class="docs-section" id="docs">
     <div class="container">
-      <div class="section-heading-center">
-        <span class="section-subtitle">Technical Repository Documentation</span>
-        <h2 class="section-title">Engineering Documentation Hub</h2>
-        <p class="section-desc">
-          Architecture specifications, CV transformation math, model evaluations, and API contracts from the repository's <code>/docs</code> directory:
-        </p>
-      </div>
-
-      <div class="docs-grid">
-        <!-- Doc 1: Master Architecture -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-red"><i class="fa-solid fa-sitemap"></i> System Topology</span>
-            <span class="doc-file-tag">docs/master_pipeline_architecture.md</span>
-          </div>
-          <h4>Master Pipeline Architecture</h4>
-          <p class="doc-desc">
-            Complete 9-stage asynchronous pipeline topology, FastAPI ASGI non-blocking threadpools, and multi-tenant PostgreSQL QueuePool lifecycle.
-          </p>
-          <div class="doc-tags">
-            <span>FastAPI ASGI</span>
-            <span>PyTorch In-Memory</span>
-            <span>PostgreSQL Neon</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/master_pipeline_architecture.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-
-        <!-- Doc 2: Computer Vision & Preprocessing -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-blue"><i class="fa-solid fa-camera"></i> Vision Layer</span>
-            <span class="doc-file-tag">docs/image_preprocessing.md</span>
-          </div>
-          <h4>CV Preprocessing &amp; Homography</h4>
-          <p class="doc-desc">
-            Mathematical formulation of CLAHE adaptive histogram equalization, bilateral noise suppression, Canny contour detection, and 4-point homography deskewing.
-          </p>
-          <div class="doc-tags">
-            <span>OpenCV CLAHE</span>
-            <span>4-Point Warp</span>
-            <span>Bilateral Filter</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/image_preprocessing.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-
-        <!-- Doc 3: LayoutLMv3 Extraction -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-yellow"><i class="fa-solid fa-microchip"></i> Transformer</span>
-            <span class="doc-file-tag">docs/layoutlmv3.md</span>
-          </div>
-          <h4>LayoutLMv3 Multimodal Extraction</h4>
-          <p class="doc-desc">
-            Multimodal token tagging (B/I-menu.nm, price, cnt), 0-1000 coordinate normalization, Y-axis row clustering heuristics, and benchmarking against Donut.
-          </p>
-          <div class="doc-tags">
-            <span>93.66% Field F1</span>
-            <span>CORD &amp; SROIE</span>
-            <span>1.92s CPU Latency</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/layoutlmv3.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-
-        <!-- Doc 4: 3-Tier Product Matching -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-green"><i class="fa-solid fa-vector-square"></i> NLP Matching</span>
-            <span class="doc-file-tag">docs/pipeline_integration_spec.md</span>
-          </div>
-          <h4>3-Tier Product Matching &amp; SBERT</h4>
-          <p class="doc-desc">
-            Progressive matching cascade from PostgreSQL pg_trgm trigrams (> 0.20) to token Jaccard (&ge; 0.45) and dense 384d SBERT (all-MiniLM-L6-v2) cosine embeddings.
-          </p>
-          <div class="doc-tags">
-            <span>pg_trgm Trigram</span>
-            <span>Token Fuzzy</span>
-            <span>SBERT 384d</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/pipeline_integration_spec.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-
-        <!-- Doc 5: Tri-Mode Analytics & SHAP -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-purple"><i class="fa-solid fa-brain"></i> Analytics &amp; XAI</span>
-            <span class="doc-file-tag">docs/save_money_analysis_spec.md</span>
-          </div>
-          <h4>Tri-Mode Analytics &amp; SHAP XAI</h4>
-          <p class="doc-desc">
-            EWMA baseline drift modeling, Isolation Forest multivariate anomaly scoring, SHAP TreeExplainer game-theoretic attribution, and UN FAO NOVA food grouping.
-          </p>
-          <div class="doc-tags">
-            <span>EWMA Baseline</span>
-            <span>Isolation Forest</span>
-            <span>TreeExplainer SHAP</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/save_money_analysis_spec.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-
-        <!-- Doc 6: REST API Specification -->
-        <div class="doc-card">
-          <div class="doc-header">
-            <span class="doc-badge badge-cyan"><i class="fa-solid fa-network-wired"></i> API Contracts</span>
-            <span class="doc-file-tag">docs/api_documentation.md</span>
-          </div>
-          <h4>REST API Contracts &amp; JSON Schemas</h4>
-          <p class="doc-desc">
-            FastAPI endpoint specs, multipart/form-data receipt upload contracts, Pydantic V2 schema validation, and stateless JWT Bearer token authentication.
-          </p>
-          <div class="doc-tags">
-            <span>FastAPI REST</span>
-            <span>Pydantic V2</span>
-            <span>JWT Bearer</span>
-          </div>
-          <a href="https://github.com/Uhashini/An-Explainable-Expense-Analysis-System-for-Complex-Bills/blob/main/docs/api_documentation.md" target="_blank" rel="noopener noreferrer" class="doc-link-btn">
-            <span>Read Spec</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Full Docs Repo CTA Banner -->
+      <!-- Complete Documentation Suite Banner -->
       <div class="docs-cta-banner">
         <div class="docs-cta-text">
           <h4><i class="fa-brands fa-github"></i> Complete Documentation Suite</h4>
@@ -1715,9 +1585,9 @@ def preprocess_receipt(image_bytes):
           <i class="fa-solid fa-folder-open"></i> Browse /docs Directory
         </a>
       </div>
-
     </div>
   </section>
+
 
   <!-- Section 9: Research Team & Mentors (From FYP Panel 1 Presentation Slide 1) -->
   <section class="team-section" id="team">
@@ -1810,7 +1680,7 @@ def preprocess_receipt(image_bytes):
           </div>
           <p class="footer-motto">
             PANTRIX: Beyond the Grocery Bill &bull; Connecting what you spend with what you consume. 
-            Final Year Capstone Project (Team 74, 23CSE498 Review 1) &bull; Dept. of Computer Science &amp; Engineering.
+            Final Year Project (Team 74, 23CSE498 ) &bull; Dept. of Computer Science &amp; Engineering.
           </p>
           <div class="footer-badges">
             <span class="f-pill"><i class="fa-solid fa-award"></i> Team 74</span>
@@ -1823,8 +1693,8 @@ def preprocess_receipt(image_bytes):
           <ul>
             <li><a href="#problem">The Problem</a></li>
             <li><a href="#objectives">Project Objectives</a></li>
-            <li><a href="#pipeline">9-Stage Pipeline</a></li>
-            <li><a href="#demo">Live Demo Showcase</a></li>
+            <li><a href="#pipeline">Methodology</a></li>
+            <li><a href="#demo">Demo Showcase</a></li>
           </ul>
         </div>
 
