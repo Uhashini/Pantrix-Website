@@ -226,6 +226,8 @@ function init3DPhoneTilt() {
       // Don't flip if clicking interactive mode buttons inside
       if (e.target.closest('.phone-mode-pill')) return;
       phone.classList.toggle('is-flipped');
+      const isFlipped = phone.classList.contains('is-flipped');
+      flipper.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
       updateFlipHint();
     });
   }
@@ -239,14 +241,18 @@ function init3DPhoneTilt() {
   }
 
   phone.addEventListener('mouseenter', () => {
+    flipper.style.transform = 'rotateY(180deg)';
     if (!phone.classList.contains('is-flipped') && flipHint) {
       flipHint.innerHTML = '<i class="fa-solid fa-chart-line"></i> <span>Viewing: Save Money STL Trend</span>';
     }
   });
 
   phone.addEventListener('mouseleave', () => {
-    if (!phone.classList.contains('is-flipped') && flipHint) {
-      flipHint.innerHTML = '<i class="fa-solid fa-repeat"></i> <span>Hover or Tap to view Trend Line</span>';
+    if (!phone.classList.contains('is-flipped')) {
+      flipper.style.transform = 'rotateY(0deg)';
+      if (flipHint) {
+        flipHint.innerHTML = '<i class="fa-solid fa-repeat"></i> <span>Hover or Tap to view Trend Line</span>';
+      }
     }
   });
 
