@@ -592,6 +592,43 @@ body {
   transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
 
+/* 3D Flippable Chassis */
+.phone-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.34, 1.25, 0.64, 1);
+  cursor: pointer;
+}
+
+/* Hover or is-flipped rotates 180 degrees to reveal back side */
+.phone-3d-wrapper:hover .phone-flipper,
+.phone-3d-wrapper.is-flipped .phone-flipper {
+  transform: rotateY(180deg);
+}
+
+.phone-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 40px;
+}
+
+.phone-face-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.phone-face-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
 .phone-device {
   width: 100%;
   height: 100%;
@@ -605,6 +642,261 @@ body {
     inset 0 0 2px 2px rgba(255, 255, 255, 0.15);
   position: relative;
   overflow: hidden;
+}
+
+/* Floating Flip Hint Pill */
+.phone-flip-hint {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(18, 17, 23, 0.92);
+  border: 1px solid rgba(148, 182, 239, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.phone-flip-hint i {
+  color: #E6E279;
+  font-size: 0.72rem;
+  animation: rotate-hint 3.5s linear infinite;
+}
+
+@keyframes rotate-hint {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.phone-3d-wrapper:hover .phone-flip-hint,
+.phone-3d-wrapper.is-flipped .phone-flip-hint {
+  background: rgba(153, 8, 8, 0.92);
+  border-color: rgba(230, 226, 121, 0.6);
+  box-shadow: 0 4px 18px rgba(153, 8, 8, 0.4);
+}
+
+/* Back Face Screen Specifics (Save Money Mode Trend Analysis) */
+.phone-screen-save-money {
+  background: #F4F2EF;
+}
+
+.app-avatar-money {
+  background: #27ae60 !important;
+}
+
+.badge-warning {
+  color: #d35400 !important;
+  background: rgba(230, 126, 34, 0.12) !important;
+}
+
+.dot-amber {
+  background: #f39c12 !important;
+  box-shadow: 0 0 6px rgba(243, 156, 18, 0.8);
+}
+
+.phone-screen-body-trend {
+  gap: 6px;
+}
+
+.trend-metric-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.trend-metric-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 5px 8px;
+  border: 1px solid rgba(148, 182, 239, 0.25);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.trend-kpi-sub {
+  font-size: 0.55rem;
+  color: #777;
+  display: block;
+}
+
+.trend-kpi-val {
+  font-size: 0.86rem;
+  font-weight: 800;
+  display: block;
+  line-height: 1.15;
+  margin: 1px 0;
+}
+
+.text-slate {
+  color: #4a5568;
+}
+
+.trend-kpi-badge {
+  font-size: 0.5rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.badge-over {
+  background: rgba(153, 8, 8, 0.1);
+  color: var(--primary);
+}
+
+.badge-baseline {
+  background: rgba(127, 140, 141, 0.15);
+  color: #555;
+}
+
+.trend-chart-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 8px 3px;
+  border: 1px solid rgba(148, 182, 239, 0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.trend-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.chart-card-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #121117;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chart-anomaly-pill {
+  font-size: 0.5rem;
+  font-weight: 700;
+  background: rgba(231, 76, 60, 0.12);
+  color: #c0392b;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.chart-legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.legend-chip {
+  font-size: 0.52rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 2px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.swatch-actual {
+  background: #990808;
+  height: 3px;
+}
+
+.swatch-baseline {
+  background: #7F8C8D;
+  border-top: 1px dashed #7F8C8D;
+}
+
+.swatch-anomaly {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e74c3c;
+}
+
+.trend-svg-container {
+  width: 100%;
+  height: 98px;
+}
+
+.trend-chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.anomaly-svg-pulse {
+  animation: svg-pulse 1.8s infinite;
+  transform-origin: 100px 16px;
+}
+
+@keyframes svg-pulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  50% { transform: scale(1.6); opacity: 0.2; }
+  100% { transform: scale(0.8); opacity: 0.8; }
+}
+
+.money-insight-card {
+  padding: 5px 8px !important;
+  margin-top: 1px;
+}
+
+.badge-anomaly {
+  background: rgba(153, 8, 8, 0.12) !important;
+  color: var(--primary) !important;
+  font-size: 0.54rem !important;
+  padding: 1px 6px !important;
+}
+
+.quick-swap-box {
+  background: #fff;
+  border-radius: 7px;
+  padding: 4px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px dashed rgba(39, 174, 96, 0.5);
+  font-size: 0.54rem;
+}
+
+.swap-label {
+  font-weight: 700;
+  color: #27ae60;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.swap-rec {
+  color: #444;
+  font-weight: 600;
+}
+
+.swap-save {
+  background: rgba(39, 174, 96, 0.15);
+  color: #27ae60;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 800;
 }
 
 .phone-notch {

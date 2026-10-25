@@ -217,8 +217,41 @@ function init3DPhoneTilt() {
     phone.style.transform = 'rotateX(0deg) rotateY(0deg)';
   });
 
+  // 3D Flip Card click/tap toggle and dynamic hint pill
+  const flipper = document.getElementById('phoneFlipper');
+  const flipHint = document.getElementById('phoneFlipHint');
+
+  if (flipper) {
+    flipper.addEventListener('click', (e) => {
+      // Don't flip if clicking interactive mode buttons inside
+      if (e.target.closest('.phone-mode-pill')) return;
+      phone.classList.toggle('is-flipped');
+      updateFlipHint();
+    });
+  }
+
+  function updateFlipHint() {
+    if (!flipHint) return;
+    const isFlipped = phone.classList.contains('is-flipped');
+    flipHint.innerHTML = isFlipped
+      ? '<i class="fa-solid fa-repeat"></i> <span>Tap or hover away to view Receipt Scanner</span>'
+      : '<i class="fa-solid fa-repeat"></i> <span>Hover or Tap to view Trend Line</span>';
+  }
+
+  phone.addEventListener('mouseenter', () => {
+    if (!phone.classList.contains('is-flipped') && flipHint) {
+      flipHint.innerHTML = '<i class="fa-solid fa-chart-line"></i> <span>Viewing: Save Money STL Trend</span>';
+    }
+  });
+
+  phone.addEventListener('mouseleave', () => {
+    if (!phone.classList.contains('is-flipped') && flipHint) {
+      flipHint.innerHTML = '<i class="fa-solid fa-repeat"></i> <span>Hover or Tap to view Trend Line</span>';
+    }
+  });
+
   // Phone Mock Mode Pills (Save Money / Eat Healthy / Gain Muscle)
-  const phonePills = document.querySelectorAll('.phone-mode-pill');
+  const phonePills = document.querySelectorAll('.phone-face-front .phone-mode-pill');
   const phoneInsight = document.getElementById('phoneInsightText');
 
   const mockInsights = {
@@ -228,7 +261,8 @@ function init3DPhoneTilt() {
   };
 
   phonePills.forEach((pill) => {
-    pill.addEventListener('click', () => {
+    pill.addEventListener('click', (e) => {
+      e.stopPropagation();
       phonePills.forEach((p) => p.classList.remove('active'));
       pill.classList.add('active');
       const mode = pill.getAttribute('data-mock-mode');
